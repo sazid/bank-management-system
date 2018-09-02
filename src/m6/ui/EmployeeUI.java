@@ -86,8 +86,16 @@ public class EmployeeUI extends UserBaseUI {
 
     private void bind() {
         viewAccountBtn.addActionListener(this);
+        addAccountBtn.addActionListener(this);
+        editAccountBtn.addActionListener(this);
+
         viewCustomerBtn.addActionListener(this);
+        addCustomerBtn.addActionListener(this);
+        editCustomerBtn.addActionListener(this);
+
         viewEmployeeBtn.addActionListener(this);
+        addEmployeeBtn.addActionListener(this);
+        editEmployeeBtn.addActionListener(this);
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -104,6 +112,10 @@ public class EmployeeUI extends UserBaseUI {
             dispose();
         } else if (src == viewEmployeeBtn) {
             new EmployeeViewerUI(userLoginInfo).setVisible(true);
+            setVisible(false);
+            dispose();
+        } else if (src == editAccountBtn) {
+            new AccountEditorUI(userLoginInfo, null, true).setVisible(true);
             setVisible(false);
             dispose();
         }

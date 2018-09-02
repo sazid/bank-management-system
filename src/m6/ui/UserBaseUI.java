@@ -27,7 +27,6 @@ public class UserBaseUI extends JFrame implements ActionListener {
         super("Bank Management System");
         this.loginInfo = loginInfo;
 
-        setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(800, 500);
 
@@ -46,7 +45,7 @@ public class UserBaseUI extends JFrame implements ActionListener {
         titleLabel.setFont(new Font("Courier", Font.BOLD, 16));
         titleLabel.setBounds(10, 0, 500, 35);
 
-        nameLabel = new JLabel("Name: " + loginInfo.name);
+        nameLabel = new JLabel("Logged in as: " + loginInfo.name);
         nameLabel.setFont(new Font("Courier", Font.PLAIN, 12));
         nameLabel.setBounds(10, 35, 200, 20);
 
