@@ -1,6 +1,7 @@
 package m6;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
 import java.sql.*;
 
 /**
@@ -11,7 +12,10 @@ public class EmployeeUI extends UserBaseUI {
 
     private UserLoginInfo userLoginInfo;
 
-    private JButton manageAccountBtn, manageCustomerBtn, manageEmployeeBtn;
+    private JButton viewAccountBtn, editAccountBtn, addAccountBtn,
+            viewCustomerBtn, editCustomerBtn, addCustomerBtn,
+            viewEmployeeBtn, editEmployeeBtn, addEmployeeBtn,
+            myInfoBtn;
 
     public EmployeeUI(UserLoginInfo userLoginInfo) {
         super(userLoginInfo);
@@ -25,22 +29,71 @@ public class EmployeeUI extends UserBaseUI {
     }
 
     private void initUI() {
-        manageAccountBtn = new JButton("Manage Accounts");
-        manageAccountBtn.setBounds(10, 300, 120, 30);
+        final int x = 190;
+        // Accounts
+        viewAccountBtn = new JButton("View Accounts");
+        viewAccountBtn.setBounds(x, 150, 120, 30);
 
-        manageCustomerBtn = new JButton("Manage Customer");
-        manageCustomerBtn.setBounds(140, 300, 120, 30);
+        addAccountBtn = new JButton("Add Account");
+        addAccountBtn.setBounds(x + 140, 150, 120, 30);
 
-        manageEmployeeBtn = new JButton("Manage Employee");
-        manageEmployeeBtn.setBounds(270, 300, 120, 30);
-        manageEmployeeBtn.setVisible(false);
+        editAccountBtn = new JButton("Edit Account");
+        editAccountBtn.setBounds(x + 2 * 140, 150, 120, 30);
 
-        mainPanel.add(manageAccountBtn);
-        mainPanel.add(manageCustomerBtn);
-        mainPanel.add(manageEmployeeBtn);
+        // Customers
+        viewCustomerBtn = new JButton("View Customers");
+        viewCustomerBtn.setBounds(x, 200, 120, 30);
+
+        addCustomerBtn = new JButton("Add Customers");
+        addCustomerBtn.setBounds(x + 140, 200, 120, 30);
+
+        editCustomerBtn = new JButton("Edit Customer");
+        editCustomerBtn.setBounds(x + 2 * 140, 200, 120, 30);
+
+        // Employees
+        viewEmployeeBtn = new JButton("View Employees");
+        viewEmployeeBtn.setBounds(x, 250, 120, 30);
+        viewEmployeeBtn.setVisible(false);
+
+        addEmployeeBtn = new JButton("Add Employee");
+        addEmployeeBtn.setBounds(x + 140, 250, 120, 30);
+        addEmployeeBtn.setVisible(false);
+
+        editEmployeeBtn = new JButton("Edit Employee");
+        editEmployeeBtn.setBounds(x + 2 * 140, 250, 120, 30);
+        editEmployeeBtn.setVisible(false);
+
+        myInfoBtn = new JButton("My Information");
+        myInfoBtn.setBounds(x, 300, 400, 30);
+
+        mainPanel.add(viewAccountBtn);
+        mainPanel.add(addAccountBtn);
+        mainPanel.add(editAccountBtn);
+
+        mainPanel.add(viewCustomerBtn);
+        mainPanel.add(addCustomerBtn);
+        mainPanel.add(editCustomerBtn);
+
+        mainPanel.add(viewEmployeeBtn);
+        mainPanel.add(addEmployeeBtn);
+        mainPanel.add(editEmployeeBtn);
+
+        mainPanel.add(myInfoBtn);
     }
 
     private void bind() {
+        viewAccountBtn.addActionListener(this);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        super.actionPerformed(e);
+        Object src = e.getSource();
+
+        if (src == viewAccountBtn) {
+            new AccountsViewerUI(userLoginInfo).setVisible(true);
+            setVisible(false);
+            dispose();
+        }
     }
 
     /**
@@ -48,7 +101,9 @@ public class EmployeeUI extends UserBaseUI {
      */
     private void enableManagerFunctions() {
         setPageTitle("Manager | Home");
-        manageEmployeeBtn.setVisible(true);
+        viewEmployeeBtn.setVisible(true);
+        editEmployeeBtn.setVisible(true);
+        addEmployeeBtn.setVisible(true);
     }
 
     private void readFromDb() {

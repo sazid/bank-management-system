@@ -53,11 +53,12 @@ public class UserBaseUI extends JFrame implements ActionListener {
         backButton.setBounds(560, 16, 100, 30);
         backButton.setVisible(false);
 
+        separator.setBounds(0, 65, 800, 5);
+
         mainPanel.add(titleLabel);
         mainPanel.add(nameLabel);
         mainPanel.add(logoutButton);
         mainPanel.add(backButton);
-        separator.setBounds(0, 65, 800, 5);
         mainPanel.add(separator);
         add(mainPanel);
     }
@@ -77,6 +78,9 @@ public class UserBaseUI extends JFrame implements ActionListener {
      * Logout user
      */
     private void logout() {
+        // Close all database connections
+        ConnectionManager.getInstance().close();
+
         new LoginUI().setVisible(true);
         setVisible(false);
         dispose();
