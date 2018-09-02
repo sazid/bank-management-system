@@ -18,7 +18,7 @@ public class AccountEditorUI extends UserBaseUI {
     private UserLoginInfo userLoginInfo;
     private String accountNumber;
 
-    private JButton saveBtn;
+    private JButton saveBtn, deleteBtn;
     private JLabel accountNumberLabel, balanceLabel;
     private JTextField accountNumberTf, balanceTf;
 
@@ -54,23 +54,33 @@ public class AccountEditorUI extends UserBaseUI {
         accountNumberTf.setBounds(x + 110, 180, 200, 30);
 
         balanceLabel = new JLabel("Balance: ");
-        balanceLabel.setBounds(x, 180 + 50, 100, 30);
+        balanceLabel.setBounds(x, 180 + 40, 100, 30);
 
         balanceTf = new JTextField();
-        balanceTf.setBounds(x + 110, 180 + 50, 200, 30);
+        balanceTf.setBounds(x + 110, 180 + 40, 200, 30);
 
         saveBtn = new JButton("Save");
-        saveBtn.setBounds(x + 110, 180 + 50 + 50, 200, 30);
+        saveBtn.setBackground(Color.GREEN);
+        saveBtn.setBounds(x + 110, 180 + 40 + 40, 200, 30);
+
+        deleteBtn = new JButton("Delete");
+        deleteBtn.setBackground(Color.RED);
+        deleteBtn.setBounds(x + 110, 180 + 40 + 40 + 40, 200, 30);
+        if (accountNumber == null || accountNumber.isEmpty()) {
+            deleteBtn.setVisible(false);
+        }
 
         mainPanel.add(accountNumberLabel);
         mainPanel.add(balanceLabel);
         mainPanel.add(accountNumberTf);
         mainPanel.add(balanceTf);
         mainPanel.add(saveBtn);
+        mainPanel.add(deleteBtn);
     }
 
     private void bind() {
         saveBtn.addActionListener(this);
+        deleteBtn.addActionListener(this);
     }
 
     private void readFromDb() {
@@ -110,6 +120,8 @@ public class AccountEditorUI extends UserBaseUI {
             dispose();
         } else if (src == saveBtn) {
             save();
+        } else if (src == deleteBtn) {
+            delete();
         }
     }
 
@@ -143,5 +155,29 @@ public class AccountEditorUI extends UserBaseUI {
             JOptionPane.showMessageDialog(this, "Error! Failed to add/update account.");
         }
     }
+
+    private void delete() {
+        // depending on whether the user is in edit mode, appropriate query will be used
+        String updateQuery = "DELETE FROM account WHERE accountNumber=?";
+
+        Connection conn = ConnectionManager.getInstance().getConnection();
+        PreparedStatement ps;
+        try {
+            ps = conn.prepareStatement(updateQuery);
+            ps.setString(1, accountNumber);
+
+            System.out.println(ps);
+            ps.execute();
+            JOptionPane.showMessageDialog(this, "Success!");
+
+            new EmployeeUI(userLoginInfo).setVisible(true);
+            setVisible(false);
+            dispose();
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error! Failed to delete account.");
+        }
+    }
+
 
 }

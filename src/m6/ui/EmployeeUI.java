@@ -122,7 +122,8 @@ public class EmployeeUI extends UserBaseUI {
                 setVisible(false);
                 dispose();
             } else {
-                JOptionPane.showMessageDialog(this, "Error! Account not found.");
+                JOptionPane.showMessageDialog(this,
+                        "Account not found or account not specified.");
             }
         } else if (src == addAccountBtn) {
             new AccountEditorUI(userLoginInfo, null).setVisible(true);
