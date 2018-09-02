@@ -1,11 +1,17 @@
 package m6.ui;
 
+import m6.ConnectionManager;
 import m6.UserLoginInfo;
 import m6.table_model.CustomerTableModel;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Vector;
 
 public class AccountEditorUI extends UserBaseUI {
 
@@ -16,7 +22,7 @@ public class AccountEditorUI extends UserBaseUI {
     private JLabel accountNumberLabel, balanceLabel;
     private JTextField accountNumberTf, balanceTf;
 
-    public AccountEditorUI(UserLoginInfo userLoginInfo, String accountNumber, boolean editMode) {
+    public AccountEditorUI(UserLoginInfo userLoginInfo, String accountNumber) {
         super(userLoginInfo);
         this.userLoginInfo = userLoginInfo;
         this.accountNumber = accountNumber;
@@ -32,6 +38,10 @@ public class AccountEditorUI extends UserBaseUI {
 
         initUI();
         bind();
+
+        if (accountNumber != null) {
+            readFromDb();
+        }
     }
 
     private void initUI() {
@@ -63,6 +73,33 @@ public class AccountEditorUI extends UserBaseUI {
         saveBtn.addActionListener(this);
     }
 
+    private void readFromDb() {
+        Connection conn = ConnectionManager.getInstance().getConnection();
+        try {
+            PreparedStatement ps = conn.prepareStatement(
+                    "SELECT accountNumber, balance FROM account WHERE accountNumber=?"
+            );
+
+            ps.setString(1, accountNumber);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String accountNumber = rs.getString("accountNumber");
+                double balance = rs.getDouble("balance");
+
+                accountNumberTf.setText(accountNumber);
+                balanceTf.setText(String.valueOf(balance));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error! Failed to fetch data.");
+
+            new EmployeeUI(userLoginInfo).setVisible(true);
+            setVisible(false);
+            dispose();
+        }
+    }
+
     public void actionPerformed(ActionEvent e) {
         super.actionPerformed(e);
         Object src = e.getSource();
@@ -77,7 +114,34 @@ public class AccountEditorUI extends UserBaseUI {
     }
 
     private void save() {
+        // depending on whether the user is in edit mode, appropriate query will be used
+        String insertQuery = "INSERT INTO account VALUES(?, ?)";
+        String updateQuery = "UPDATE account SET accountNumber=?, balance=? WHERE accountNumber=?";
 
+        Connection conn = ConnectionManager.getInstance().getConnection();
+        PreparedStatement ps;
+        try {
+            if (accountNumber == null || accountNumber.trim().isEmpty()) {
+                ps = conn.prepareStatement(insertQuery);
+            } else {
+                ps = conn.prepareStatement(updateQuery);
+                ps.setString(3, accountNumber);
+            }
+
+            ps.setString(1, accountNumberTf.getText().trim());
+            ps.setDouble(2, Double.parseDouble(balanceTf.getText()));
+
+            System.out.println(ps);
+            ps.execute();
+            JOptionPane.showMessageDialog(this, "Success!");
+
+            new EmployeeUI(userLoginInfo).setVisible(true);
+            setVisible(false);
+            dispose();
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error! Failed to add/update account.");
+        }
     }
 
 }

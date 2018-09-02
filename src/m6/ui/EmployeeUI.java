@@ -115,10 +115,41 @@ public class EmployeeUI extends UserBaseUI {
             setVisible(false);
             dispose();
         } else if (src == editAccountBtn) {
-            new AccountEditorUI(userLoginInfo, null, true).setVisible(true);
+            String accountNumber = JOptionPane.showInputDialog(this,"Account Number: ");
+
+            if (verifyAccountNumber(accountNumber)) {
+                new AccountEditorUI(userLoginInfo, accountNumber).setVisible(true);
+                setVisible(false);
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Error! Account not found.");
+            }
+        } else if (src == addAccountBtn) {
+            new AccountEditorUI(userLoginInfo, null).setVisible(true);
             setVisible(false);
             dispose();
         }
+    }
+
+    private boolean verifyAccountNumber(String accountNumber) {
+        Connection conn = ConnectionManager.getInstance().getConnection();
+        try {
+            PreparedStatement ps = conn.prepareStatement(
+                    "SELECT accountNumber FROM account WHERE accountNumber=?"
+            );
+            ps.setString(1, accountNumber);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                rs.close();
+                ps.close();
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
     }
 
     /**
