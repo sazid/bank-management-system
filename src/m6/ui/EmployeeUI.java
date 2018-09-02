@@ -1,4 +1,7 @@
-package m6;
+package m6.ui;
+
+import m6.ConnectionManager;
+import m6.UserLoginInfo;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

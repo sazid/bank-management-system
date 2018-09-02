@@ -1,4 +1,8 @@
-package m6;
+package m6.ui;
+
+import m6.ConnectionManager;
+import m6.UserLoginInfo;
+import m6.ui.EmployeeUI;
 
 import javax.swing.*;
 import java.awt.*;
