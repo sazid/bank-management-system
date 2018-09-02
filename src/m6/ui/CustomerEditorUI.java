@@ -2,7 +2,6 @@ package m6.ui;
 
 import m6.ConnectionManager;
 import m6.UserLoginInfo;
-import m6.table_model.CustomerTableModel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,9 +10,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Vector;
 
-public class AccountEditorUI extends UserBaseUI {
+public class CustomerEditorUI extends UserBaseUI {
 
     private UserLoginInfo userLoginInfo;
     private String accountNumber;
@@ -22,7 +20,7 @@ public class AccountEditorUI extends UserBaseUI {
     private JLabel accountNumberLabel, balanceLabel;
     private JTextField accountNumberTf, balanceTf;
 
-    public AccountEditorUI(UserLoginInfo userLoginInfo, String accountNumber) {
+    public CustomerEditorUI(UserLoginInfo userLoginInfo, String accountNumber) {
         super(userLoginInfo);
         this.userLoginInfo = userLoginInfo;
         this.accountNumber = accountNumber;
@@ -46,7 +44,7 @@ public class AccountEditorUI extends UserBaseUI {
 
     private void initUI() {
         int x = 200;
-        int y = 180;
+        int y = 140;
 
         accountNumberLabel = new JLabel("Account Number: ");
         accountNumberLabel.setBounds(x, y, 100, 30);
@@ -130,25 +128,14 @@ public class AccountEditorUI extends UserBaseUI {
         // depending on whether the user is in edit mode, appropriate query will be used
         String insertQuery = "INSERT INTO account VALUES(?, ?)";
         String updateQuery = "UPDATE account SET accountNumber=?, balance=? WHERE accountNumber=?";
-        String updateCustomerQuery = "UPDATE customer SET accountNumber=? WHERE accountNumber=?";
-        String updateTransactionQuery = "UPDATE transaction SET accountNumber=? WHERE accountNumber=?";
 
         Connection conn = ConnectionManager.getInstance().getConnection();
-        PreparedStatement ps, psCustomer = null, psTransaction = null;
+        PreparedStatement ps;
         try {
             if (accountNumber == null || accountNumber.trim().isEmpty()) {
                 ps = conn.prepareStatement(insertQuery);
             } else {
                 ps = conn.prepareStatement(updateQuery);
-                psCustomer = conn.prepareStatement(updateCustomerQuery);
-                psTransaction = conn.prepareStatement(updateTransactionQuery);
-
-                psCustomer.setString(1, accountNumber);
-                psCustomer.setString(2, accountNumber);
-
-                psTransaction.setString(1, accountNumber);
-                psTransaction.setString(2, accountNumber);
-
                 ps.setString(3, accountNumber);
             }
 
@@ -157,15 +144,6 @@ public class AccountEditorUI extends UserBaseUI {
 
             System.out.println(ps);
             ps.execute();
-
-            if (psCustomer != null && psTransaction != null) {
-                System.out.println(psCustomer);
-                psCustomer.execute();
-
-                System.out.println(psTransaction);
-                psTransaction.execute();
-            }
-
             JOptionPane.showMessageDialog(this, "Success!");
 
             new EmployeeUI(userLoginInfo).setVisible(true);
@@ -179,30 +157,16 @@ public class AccountEditorUI extends UserBaseUI {
 
     private void delete() {
         // depending on whether the user is in edit mode, appropriate query will be used
-        String deleteQuery = "DELETE FROM account WHERE accountNumber=?";
-        String deleteCustomerQuery = "UPDATE customer SET accountNumber='' WHERE accountNumber=?";
-        String deleteTransactionQuery = "DELETE FROM transaction WHERE accountNumber=?";
+        String updateQuery = "DELETE FROM account WHERE accountNumber=?";
 
         Connection conn = ConnectionManager.getInstance().getConnection();
-        PreparedStatement ps, psCustomer = null, psTransaction = null;
+        PreparedStatement ps;
         try {
-            ps = conn.prepareStatement(deleteQuery);
+            ps = conn.prepareStatement(updateQuery);
             ps.setString(1, accountNumber);
 
-            psCustomer = conn.prepareStatement(deleteCustomerQuery);
-            psCustomer.setString(1, accountNumber);
-
-            psTransaction = conn.prepareStatement(deleteTransactionQuery);
-            psTransaction.setString(1, accountNumber);
-
             System.out.println(ps);
-            System.out.println(psCustomer);
-            System.out.println(psTransaction);
-
             ps.execute();
-            psCustomer.execute();
-            psTransaction.execute();
-
             JOptionPane.showMessageDialog(this, "Success!");
 
             new EmployeeUI(userLoginInfo).setVisible(true);
@@ -213,5 +177,5 @@ public class AccountEditorUI extends UserBaseUI {
             JOptionPane.showMessageDialog(this, "Error! Failed to delete account.");
         }
     }
-
+    
 }

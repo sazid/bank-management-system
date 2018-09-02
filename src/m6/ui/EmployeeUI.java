@@ -129,6 +129,21 @@ public class EmployeeUI extends UserBaseUI {
             new AccountEditorUI(userLoginInfo, null).setVisible(true);
             setVisible(false);
             dispose();
+        } else if (src == addEmployeeBtn) {
+            new EmployeeEditorUI(userLoginInfo, null).setVisible(true);
+            setVisible(false);
+            dispose();
+        } else if (src == editEmployeeBtn) {
+            String username = JOptionPane.showInputDialog(this,"Employee username: ");
+
+            if (verifyEmployeeUsername(username)) {
+                new EmployeeEditorUI(userLoginInfo, username).setVisible(true);
+                setVisible(false);
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(this,
+                        "Username not found or username not specified.");
+            }
         }
     }
 
@@ -139,6 +154,27 @@ public class EmployeeUI extends UserBaseUI {
                     "SELECT accountNumber FROM account WHERE accountNumber=?"
             );
             ps.setString(1, accountNumber);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                rs.close();
+                ps.close();
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    private boolean verifyEmployeeUsername(String username) {
+        Connection conn = ConnectionManager.getInstance().getConnection();
+        try {
+            PreparedStatement ps = conn.prepareStatement(
+                    "SELECT username FROM employee WHERE username=?"
+            );
+            ps.setString(1, username);
 
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
