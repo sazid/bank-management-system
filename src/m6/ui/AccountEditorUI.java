@@ -143,10 +143,10 @@ public class AccountEditorUI extends UserBaseUI {
                 psCustomer = conn.prepareStatement(updateCustomerQuery);
                 psTransaction = conn.prepareStatement(updateTransactionQuery);
 
-                psCustomer.setString(1, accountNumber);
+                psCustomer.setString(1, accountNumberTf.getText().trim());
                 psCustomer.setString(2, accountNumber);
 
-                psTransaction.setString(1, accountNumber);
+                psTransaction.setString(1, accountNumberTf.getText().trim());
                 psTransaction.setString(2, accountNumber);
 
                 ps.setString(3, accountNumber);
