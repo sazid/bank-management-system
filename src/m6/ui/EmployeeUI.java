@@ -86,6 +86,8 @@ public class EmployeeUI extends UserBaseUI {
 
     private void bind() {
         viewAccountBtn.addActionListener(this);
+        viewCustomerBtn.addActionListener(this);
+        viewEmployeeBtn.addActionListener(this);
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -94,6 +96,14 @@ public class EmployeeUI extends UserBaseUI {
 
         if (src == viewAccountBtn) {
             new AccountsViewerUI(userLoginInfo).setVisible(true);
+            setVisible(false);
+            dispose();
+        } else if (src == viewCustomerBtn) {
+            new CustomerViewerUI(userLoginInfo).setVisible(true);
+            setVisible(false);
+            dispose();
+        } else if (src == viewEmployeeBtn) {
+            new EmployeeViewerUI(userLoginInfo).setVisible(true);
             setVisible(false);
             dispose();
         }

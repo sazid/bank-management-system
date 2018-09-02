@@ -2,18 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0540ce07-aacd-4a02-9201-7e40194d1012" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/m6/table_model/AccountTableModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/m6/table_model/CustomerTableModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/m6/table_model/EmployeeTableModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/m6/ui/CustomerViewerUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/m6/ui/EmployeeViewerUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BankManagementSystem/m6/LoginUI.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BankManagementSystem/m6/Start$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BankManagementSystem/m6/Start$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BankManagementSystem/m6/Start.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BankManagementSystem/m6/Start.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/m6/AccountsViewerUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/m6/ui/AccountsViewerUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/m6/EmployeeUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/m6/ui/EmployeeUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/m6/LoginUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/m6/ui/LoginUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/m6/Start.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/m6/Start.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/m6/UserBaseUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/m6/ui/UserBaseUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/m6/ui/EmployeeUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/m6/ui/EmployeeUI.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -50,25 +42,25 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="java" value="19" />
+          <entry key="java" value="21" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JAVA" value="19" />
+          <entry key="JAVA" value="21" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="4" />
-          <entry key="java" value="10731" />
-          <entry key="txt" value="67" />
+          <entry key="java" value="10842" />
+          <entry key="txt" value="110" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="10724" />
-          <entry key="PLAIN_TEXT" value="71" />
+          <entry key="JAVA" value="10835" />
+          <entry key="PLAIN_TEXT" value="114" />
           <entry key="SQL" value="7" />
         </counts>
       </usages-collector>
@@ -88,26 +80,13 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/m6/ui/EmployeeUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+            <state relative-caret-position="62">
+              <caret line="105" column="33" selection-start-line="105" selection-start-column="33" selection-end-line="105" selection-end-column="33" />
               <folding>
-                <element signature="e#1188#1189#0" expanded="true" />
-                <element signature="e#1219#1220#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/m6/ui/LoginUI.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="18">
-              <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-              <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="method#initUI#0;class#EmployeeUI#0" />
               </folding>
             </state>
           </provider>
@@ -121,6 +100,24 @@
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/m6/ui/CustomerViewerUI.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="666">
+              <caret line="43" column="26" selection-start-line="43" selection-start-column="16" selection-end-line="43" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/m6/ui/EmployeeViewerUI.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="540">
+              <caret line="36" column="4" selection-start-line="36" selection-start-column="4" selection-end-line="36" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -162,7 +159,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/m6/table_model/EmployeeTableModel.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1242">
@@ -172,21 +169,6 @@
                 <element signature="e#2453#2454#0" expanded="true" />
                 <element signature="e#2515#2516#0" expanded="true" />
                 <element signature="e#2557#2558#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/m6/ui/UserBaseUI.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-360">
-              <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
-              <folding>
-                <element signature="e#1918#1919#0" expanded="true" />
-                <element signature="e#1971#1972#0" expanded="true" />
-                <element signature="e#1831#1832#0" expanded="true" />
-                <element signature="e#1872#1873#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -226,6 +208,9 @@
         <option value="$PROJECT_DIR$/src/m6/ui/AccountsViewerUI.java" />
         <option value="$PROJECT_DIR$/src/m6/table_model/CustomerTableModel.java" />
         <option value="$PROJECT_DIR$/src/m6/table_model/EmployeeTableModel.java" />
+        <option value="$PROJECT_DIR$/src/m6/ui/CustomerViewerUI.java" />
+        <option value="$PROJECT_DIR$/src/m6/ui/EmployeeViewerUI.java" />
+        <option value="$PROJECT_DIR$/src/m6/ui/EmployeeUI.java" />
       </list>
     </option>
   </component>
@@ -292,7 +277,7 @@
     <property name="DatabaseDriversLRU" value="mariadb" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1535902289577" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1535903486790" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -300,6 +285,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="m6.ui" />
       <recent name="m6.table_model" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
@@ -340,7 +326,7 @@
       <workItem from="1535540192998" duration="4265000" />
       <workItem from="1535797043255" duration="8760000" />
       <workItem from="1535846464569" duration="5098000" />
-      <workItem from="1535873557090" duration="16863000" />
+      <workItem from="1535873557090" duration="18543000" />
     </task>
     <task id="LOCAL-00001" summary=".">
       <created>1535888852060</created>
@@ -363,17 +349,23 @@
       <option name="project" value="LOCAL" />
       <updated>1535900657799</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Rearrange and create other two table models">
+      <created>1535902303144</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1535902303144</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="35076000" />
+    <option name="totallyTimeSpent" value="36756000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49918434" visible="true" weight="0.124200426" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49918434" visible="true" weight="0.124200426" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -382,12 +374,12 @@
       <window_info id="Favorites" order="6" sideWeight="0.5008157" side_tool="true" weight="0.2713348" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32936078" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4989339" visible="true" weight="0.29035753" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4989339" weight="0.29035753" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3997833" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="7" weight="0.32936078" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="7" visible="true" weight="0.32936078" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Terminal" order="9" weight="0.32932165" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5010661" side_tool="true" weight="0.29035753" />
@@ -414,7 +406,8 @@
     <MESSAGE value="." />
     <MESSAGE value="Add buttons" />
     <MESSAGE value="Query account data from db" />
-    <option name="LAST_COMMIT_MESSAGE" value="Query account data from db" />
+    <MESSAGE value="Rearrange and create other two table models" />
+    <option name="LAST_COMMIT_MESSAGE" value="Rearrange and create other two table models" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/m6/ConnectionManager.java" />
@@ -439,17 +432,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/m6/ui/EmployeeUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-          <folding>
-            <element signature="e#1188#1189#0" expanded="true" />
-            <element signature="e#1219#1220#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/m6/ui/LoginUI.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="18">
@@ -469,16 +451,6 @@
             <element signature="e#1971#1972#0" expanded="true" />
             <element signature="e#1831#1832#0" expanded="true" />
             <element signature="e#1872#1873#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/m6/ui/AccountsViewerUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="2" selection-start-line="2" selection-end-line="2" />
-          <folding>
-            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -525,6 +497,40 @@
             <element signature="e#2453#2454#0" expanded="true" />
             <element signature="e#2515#2516#0" expanded="true" />
             <element signature="e#2557#2558#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/m6/ui/AccountsViewerUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/m6/ui/CustomerViewerUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="666">
+          <caret line="43" column="26" selection-start-line="43" selection-start-column="16" selection-end-line="43" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/m6/ui/EmployeeViewerUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="36" column="4" selection-start-line="36" selection-start-column="4" selection-end-line="36" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/m6/ui/EmployeeUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="62">
+          <caret line="105" column="33" selection-start-line="105" selection-start-column="33" selection-end-line="105" selection-end-column="33" />
+          <folding>
+            <element signature="method#initUI#0;class#EmployeeUI#0" />
           </folding>
         </state>
       </provider>
