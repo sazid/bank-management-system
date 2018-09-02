@@ -14,21 +14,21 @@ import java.sql.SQLException;
 public class CustomerEditorUI extends UserBaseUI {
 
     private UserLoginInfo userLoginInfo;
-    private String accountNumber;
+    private String username;
 
     private JButton saveBtn, deleteBtn;
-    private JLabel accountNumberLabel, balanceLabel;
-    private JTextField accountNumberTf, balanceTf;
+    private JLabel usernameLabel, phoneNumberLabel, accountNumberLabel;
+    private JTextField usernameTf, phoneNumberTf, accountNumberTf;
 
-    public CustomerEditorUI(UserLoginInfo userLoginInfo, String accountNumber) {
+    public CustomerEditorUI(UserLoginInfo userLoginInfo, String username) {
         super(userLoginInfo);
         this.userLoginInfo = userLoginInfo;
-        this.accountNumber = accountNumber;
+        this.username = username;
 
-        if (accountNumber != null) {
-            setPageTitle("Edit Account");
+        if (username != null) {
+            setPageTitle("Edit Customer");
         } else {
-            setPageTitle("Add Account");
+            setPageTitle("Add Customer");
         }
 
         backButton.setVisible(true);
@@ -37,7 +37,7 @@ public class CustomerEditorUI extends UserBaseUI {
         initUI();
         bind();
 
-        if (accountNumber != null) {
+        if (username != null) {
             readFromDb();
         }
     }
@@ -46,33 +46,47 @@ public class CustomerEditorUI extends UserBaseUI {
         int x = 200;
         int y = 140;
 
+        usernameLabel = new JLabel("Username: ");
+        usernameLabel.setBounds(x, y, 100, 30);
+
+        usernameTf = new JTextField();
+        usernameTf.setBounds(x + 110, y, 200, 30);
+        if (username != null) {
+            usernameTf.setEditable(false);
+        }
+
+        phoneNumberLabel = new JLabel("Phone Number: ");
+        phoneNumberLabel.setBounds(x, y + 40, 100, 30);
+
+        phoneNumberTf = new JTextField();
+        phoneNumberTf.setBounds(x + 110, y + 40, 200, 30);
+
         accountNumberLabel = new JLabel("Account Number: ");
-        accountNumberLabel.setBounds(x, y, 100, 30);
+        accountNumberLabel.setBounds(x, y + 40 * 2, 100, 30);
 
         accountNumberTf = new JTextField();
-        accountNumberTf.setBounds(x + 110, y, 200, 30);
-
-        balanceLabel = new JLabel("Balance: ");
-        balanceLabel.setBounds(x, y + 40, 100, 30);
-
-        balanceTf = new JTextField();
-        balanceTf.setBounds(x + 110, y + 40, 200, 30);
+        accountNumberTf.setBounds(x + 110, y + 40 * 2, 200, 30);
 
         saveBtn = new JButton("Save");
         saveBtn.setBackground(Color.GREEN);
-        saveBtn.setBounds(x + 110, y + 40 + 40, 200, 30);
+        saveBtn.setBounds(x + 110, y + 40 * 3, 200, 30);
 
         deleteBtn = new JButton("Delete");
         deleteBtn.setBackground(Color.RED);
-        deleteBtn.setBounds(x + 110, y + 40 + 40 + 40, 200, 30);
-        if (accountNumber == null || accountNumber.isEmpty()) {
+        deleteBtn.setBounds(x + 110, y + 40 * 4, 200, 30);
+        if (username == null || username.isEmpty()) {
             deleteBtn.setVisible(false);
         }
 
+        mainPanel.add(usernameLabel);
+        mainPanel.add(usernameTf);
+
+        mainPanel.add(phoneNumberLabel);
+        mainPanel.add(phoneNumberTf);
+
         mainPanel.add(accountNumberLabel);
-        mainPanel.add(balanceLabel);
         mainPanel.add(accountNumberTf);
-        mainPanel.add(balanceTf);
+
         mainPanel.add(saveBtn);
         mainPanel.add(deleteBtn);
     }
@@ -86,18 +100,20 @@ public class CustomerEditorUI extends UserBaseUI {
         Connection conn = ConnectionManager.getInstance().getConnection();
         try {
             PreparedStatement ps = conn.prepareStatement(
-                    "SELECT accountNumber, balance FROM account WHERE accountNumber=?"
+                    "SELECT username, phoneNumber, accountNumber FROM customer WHERE username=?"
             );
 
-            ps.setString(1, accountNumber);
+            ps.setString(1, username);
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
+                String username = rs.getString("username");
+                String phoneNumber = rs.getString("phoneNumber");
                 String accountNumber = rs.getString("accountNumber");
-                double balance = rs.getDouble("balance");
 
+                usernameTf.setText(username);
+                phoneNumberTf.setText(phoneNumber);
                 accountNumberTf.setText(accountNumber);
-                balanceTf.setText(String.valueOf(balance));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -124,23 +140,55 @@ public class CustomerEditorUI extends UserBaseUI {
         }
     }
 
+    private boolean verifyUsername(String username) {
+        Connection conn = ConnectionManager.getInstance().getConnection();
+        try {
+            PreparedStatement ps = conn.prepareStatement(
+                    "SELECT username FROM login WHERE username=?"
+            );
+            ps.setString(1, username);
+            System.out.println(ps);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                rs.close();
+                ps.close();
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
     private void save() {
         // depending on whether the user is in edit mode, appropriate query will be used
-        String insertQuery = "INSERT INTO account VALUES(?, ?)";
-        String updateQuery = "UPDATE account SET accountNumber=?, balance=? WHERE accountNumber=?";
+        String insertQuery = "INSERT INTO customer VALUES(?, ?, ?)";
+        String updateCustomerQuery = "UPDATE customer SET phoneNumber=?, accountNumber=? WHERE username=?";
 
         Connection conn = ConnectionManager.getInstance().getConnection();
         PreparedStatement ps;
         try {
-            if (accountNumber == null || accountNumber.trim().isEmpty()) {
-                ps = conn.prepareStatement(insertQuery);
-            } else {
-                ps = conn.prepareStatement(updateQuery);
-                ps.setString(3, accountNumber);
-            }
+            if (username == null || username.trim().isEmpty()) {
+                if (!verifyUsername(usernameTf.getText())) {
+                    JOptionPane.showMessageDialog(this,
+                            "No user present with the given username.");
+                    return;
+                }
 
-            ps.setString(1, accountNumberTf.getText().trim());
-            ps.setDouble(2, Double.parseDouble(balanceTf.getText()));
+                ps = conn.prepareStatement(insertQuery);
+
+                ps.setString(1, usernameTf.getText());
+                ps.setString(2, phoneNumberTf.getText().trim());
+                ps.setString(3, accountNumberTf.getText().trim());
+            } else {
+                ps = conn.prepareStatement(updateCustomerQuery);
+
+                ps.setString(1, phoneNumberTf.getText().trim());
+                ps.setString(2, accountNumberTf.getText().trim());
+                ps.setString(3, usernameTf.getText());
+            }
 
             System.out.println(ps);
             ps.execute();
@@ -151,31 +199,36 @@ public class CustomerEditorUI extends UserBaseUI {
             dispose();
         } catch (Exception e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Error! Failed to add/update account.");
+            JOptionPane.showMessageDialog(this, "Error! Failed to add/update customer.");
         }
     }
 
     private void delete() {
         // depending on whether the user is in edit mode, appropriate query will be used
-        String updateQuery = "DELETE FROM account WHERE accountNumber=?";
+        String updateQuery = "DELETE FROM customer WHERE username=?";
 
         Connection conn = ConnectionManager.getInstance().getConnection();
         PreparedStatement ps;
         try {
             ps = conn.prepareStatement(updateQuery);
-            ps.setString(1, accountNumber);
+            ps.setString(1, username);
 
             System.out.println(ps);
-            ps.execute();
-            JOptionPane.showMessageDialog(this, "Success!");
+            int count = ps.executeUpdate();
 
-            new EmployeeUI(userLoginInfo).setVisible(true);
-            setVisible(false);
-            dispose();
+            if (count > 0) {
+                JOptionPane.showMessageDialog(this, "Success!");
+                new EmployeeUI(userLoginInfo).setVisible(true);
+                setVisible(false);
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Error! Wrong username.");
+            }
         } catch (Exception e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Error! Failed to delete account.");
+            JOptionPane.showMessageDialog(this, "Error! Failed to delete customer.");
         }
     }
     
 }
+

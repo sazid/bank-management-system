@@ -3,8 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="0540ce07-aacd-4a02-9201-7e40194d1012" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/m6/ui/AccountEditorUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/m6/ui/AccountEditorUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/m6/ui/CustomerEditorUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/m6/ui/CustomerEditorUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/m6/ui/EmployeeEditorUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/m6/ui/EmployeeEditorUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/m6/ui/EmployeeUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/m6/ui/EmployeeUI.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -41,25 +42,25 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="java" value="29" />
+          <entry key="java" value="30" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JAVA" value="29" />
+          <entry key="JAVA" value="30" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="4" />
-          <entry key="java" value="15669" />
-          <entry key="txt" value="272" />
+          <entry key="java" value="16015" />
+          <entry key="txt" value="284" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="15661" />
-          <entry key="PLAIN_TEXT" value="276" />
+          <entry key="JAVA" value="16007" />
+          <entry key="PLAIN_TEXT" value="288" />
           <entry key="SQL" value="8" />
         </counts>
       </usages-collector>
@@ -73,10 +74,13 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/m6/ui/EmployeeUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="206" column="14" lean-forward="true" selection-start-line="206" selection-start-column="14" selection-end-line="206" selection-end-column="14" />
+            <state relative-caret-position="249">
+              <caret line="158" column="46" lean-forward="true" selection-start-line="158" selection-start-column="46" selection-end-line="158" selection-end-column="46" />
               <folding>
                 <element signature="method#initUI#0;class#EmployeeUI#0" />
+                <element signature="method#verifyAccountNumber#0;class#EmployeeUI#0" />
+                <element signature="method#verifyUsername#0;class#EmployeeUI#0" />
+                <element signature="method#verifyEmployeeUsername#1;class#EmployeeUI#0" />
               </folding>
             </state>
           </provider>
@@ -103,20 +107,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/m6/ui/EmployeeEditorUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="692">
-              <caret line="238" column="13" selection-start-line="238" selection-start-column="13" selection-end-line="238" selection-end-column="13" />
+            <state relative-caret-position="782">
+              <caret line="247" selection-start-line="247" selection-end-line="247" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/m6/ui/CustomerEditorUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="46" column="18" selection-start-line="46" selection-start-column="18" selection-end-line="46" selection-end-column="18" />
+            <state relative-caret-position="108">
+              <caret line="63" column="55" selection-start-line="63" selection-start-column="55" selection-end-line="63" selection-end-column="55" />
             </state>
           </provider>
         </entry>
@@ -169,10 +173,10 @@
         <option value="$PROJECT_DIR$/src/m6/ui/LoginUI.java" />
         <option value="$PROJECT_DIR$/src/m6/ui/AccountEditor.java" />
         <option value="$PROJECT_DIR$/src/m6/ui/UserBaseUI.java" />
-        <option value="$PROJECT_DIR$/src/m6/ui/CustomerEditorUI.java" />
-        <option value="$PROJECT_DIR$/src/m6/ui/EmployeeUI.java" />
         <option value="$PROJECT_DIR$/src/m6/ui/AccountEditorUI.java" />
         <option value="$PROJECT_DIR$/src/m6/ui/EmployeeEditorUI.java" />
+        <option value="$PROJECT_DIR$/src/m6/ui/EmployeeUI.java" />
+        <option value="$PROJECT_DIR$/src/m6/ui/CustomerEditorUI.java" />
       </list>
     </option>
   </component>
@@ -239,7 +243,7 @@
     <property name="DatabaseDriversLRU" value="mariadb" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1535919493763" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1535921575339" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -288,7 +292,7 @@
       <workItem from="1535540192998" duration="4265000" />
       <workItem from="1535797043255" duration="8760000" />
       <workItem from="1535846464569" duration="5098000" />
-      <workItem from="1535873557090" duration="30622000" />
+      <workItem from="1535873557090" duration="31937000" />
     </task>
     <task id="LOCAL-00001" summary=".">
       <created>1535888852060</created>
@@ -360,11 +364,18 @@
       <option name="project" value="LOCAL" />
       <updated>1535918453492</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Delete count">
+      <created>1535919570978</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1535919570978</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="48835000" />
+    <option name="totallyTimeSpent" value="50150000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -379,7 +390,7 @@
       <window_info id="Favorites" order="6" sideWeight="0.5008157" side_tool="true" weight="0.2713348" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32936078" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4989339" weight="0.29035753" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4989339" visible="true" weight="0.29035753" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3997833" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -417,7 +428,8 @@
     <MESSAGE value="Account delete in editor" />
     <MESSAGE value="." />
     <MESSAGE value="Update customer and transaction account number accordingly" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update customer and transaction account number accordingly" />
+    <MESSAGE value="Delete count" />
+    <option name="LAST_COMMIT_MESSAGE" value="Delete count" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/m6/ConnectionManager.java" />
@@ -516,29 +528,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/m6/ui/CustomerEditorUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="46" column="18" selection-start-line="46" selection-start-column="18" selection-end-line="46" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/m6/ui/LoginUI.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="80">
           <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
           <folding>
             <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/m6/ui/EmployeeUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="206" column="14" lean-forward="true" selection-start-line="206" selection-start-column="14" selection-end-line="206" selection-end-column="14" />
-          <folding>
-            <element signature="method#initUI#0;class#EmployeeUI#0" />
           </folding>
         </state>
       </provider>
@@ -552,8 +547,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/m6/ui/EmployeeEditorUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="692">
-          <caret line="238" column="13" selection-start-line="238" selection-start-column="13" selection-end-line="238" selection-end-column="13" />
+        <state relative-caret-position="782">
+          <caret line="247" selection-start-line="247" selection-end-line="247" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/m6/ui/EmployeeUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="249">
+          <caret line="158" column="46" lean-forward="true" selection-start-line="158" selection-start-column="46" selection-end-line="158" selection-end-column="46" />
+          <folding>
+            <element signature="method#initUI#0;class#EmployeeUI#0" />
+            <element signature="method#verifyAccountNumber#0;class#EmployeeUI#0" />
+            <element signature="method#verifyUsername#0;class#EmployeeUI#0" />
+            <element signature="method#verifyEmployeeUsername#1;class#EmployeeUI#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/m6/ui/CustomerEditorUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="63" column="55" selection-start-line="63" selection-start-column="55" selection-end-line="63" selection-end-column="55" />
         </state>
       </provider>
     </entry>
