@@ -18,6 +18,7 @@ public class EmployeeUI extends UserBaseUI {
     private JButton viewAccountBtn, editAccountBtn, addAccountBtn,
             viewCustomerBtn, editCustomerBtn, addCustomerBtn,
             viewEmployeeBtn, editEmployeeBtn, addEmployeeBtn,
+            viewLoginBtn, editLoginBtn, addLoginBtn,
             myInfoBtn;
 
     public EmployeeUI(UserLoginInfo userLoginInfo) {
@@ -66,8 +67,18 @@ public class EmployeeUI extends UserBaseUI {
         editEmployeeBtn.setBounds(x + 2 * 140, 250, 120, 30);
         editEmployeeBtn.setVisible(false);
 
+        // Users
+        viewLoginBtn = new JButton("View Users");
+        viewLoginBtn.setBounds(x, 300, 120, 30);
+
+        addLoginBtn = new JButton("Add User");
+        addLoginBtn.setBounds(x + 140, 300, 120, 30);
+
+        editLoginBtn = new JButton("Edit User");
+        editLoginBtn.setBounds(x + 2 * 140, 300, 120, 30);
+
         myInfoBtn = new JButton("My Information");
-        myInfoBtn.setBounds(x, 300, 400, 30);
+        myInfoBtn.setBounds(x, 350, 400, 30);
 
         mainPanel.add(viewAccountBtn);
         mainPanel.add(addAccountBtn);
@@ -81,6 +92,10 @@ public class EmployeeUI extends UserBaseUI {
         mainPanel.add(addEmployeeBtn);
         mainPanel.add(editEmployeeBtn);
 
+        mainPanel.add(viewLoginBtn);
+        mainPanel.add(addLoginBtn);
+        mainPanel.add(editLoginBtn);
+
         mainPanel.add(myInfoBtn);
     }
 
@@ -92,6 +107,10 @@ public class EmployeeUI extends UserBaseUI {
         viewCustomerBtn.addActionListener(this);
         addCustomerBtn.addActionListener(this);
         editCustomerBtn.addActionListener(this);
+
+        viewLoginBtn.addActionListener(this);
+        addLoginBtn.addActionListener(this);
+        editLoginBtn.addActionListener(this);
 
         viewEmployeeBtn.addActionListener(this);
         addEmployeeBtn.addActionListener(this);
@@ -112,6 +131,10 @@ public class EmployeeUI extends UserBaseUI {
             dispose();
         } else if (src == viewEmployeeBtn) {
             new EmployeeViewerUI(userLoginInfo).setVisible(true);
+            setVisible(false);
+            dispose();
+        } else if (src == viewLoginBtn) {
+            new LoginViewerUI(userLoginInfo).setVisible(true);
             setVisible(false);
             dispose();
         } else if (src == editAccountBtn) {
@@ -153,6 +176,21 @@ public class EmployeeUI extends UserBaseUI {
 
             if (verifyCustomerUsername(username)) {
                 new CustomerEditorUI(userLoginInfo, username).setVisible(true);
+                setVisible(false);
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(this,
+                        "Username not found or username not specified.");
+            }
+        } else if (src == addLoginBtn) {
+            new LoginEditorUI(userLoginInfo, null).setVisible(true);
+            setVisible(false);
+            dispose();
+        } else if (src == editLoginBtn) {
+            String username = JOptionPane.showInputDialog(this,"Username: ");
+
+            if (verifyUsername(username)) {
+                new LoginEditorUI(userLoginInfo, username).setVisible(true);
                 setVisible(false);
                 dispose();
             } else {
@@ -211,6 +249,28 @@ public class EmployeeUI extends UserBaseUI {
                     "SELECT username FROM customer WHERE username=?"
             );
             ps.setString(1, username);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                rs.close();
+                ps.close();
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    private boolean verifyUsername(String username) {
+        Connection conn = ConnectionManager.getInstance().getConnection();
+        try {
+            PreparedStatement ps = conn.prepareStatement(
+                    "SELECT username FROM login WHERE username=?"
+            );
+            ps.setString(1, username);
+            System.out.println(ps);
 
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
