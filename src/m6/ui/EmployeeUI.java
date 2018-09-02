@@ -115,6 +115,8 @@ public class EmployeeUI extends UserBaseUI {
         viewEmployeeBtn.addActionListener(this);
         addEmployeeBtn.addActionListener(this);
         editEmployeeBtn.addActionListener(this);
+
+        myInfoBtn.addActionListener(this);
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -197,6 +199,10 @@ public class EmployeeUI extends UserBaseUI {
                 JOptionPane.showMessageDialog(this,
                         "Username not found or username not specified.");
             }
+        } else if (src == myInfoBtn) {
+            new LoginEditorUI(userLoginInfo, userLoginInfo.username).setVisible(true);
+            setVisible(false);
+            dispose();
         }
     }
 
