@@ -1,5 +1,6 @@
 package m6;
 
+import javax.swing.*;
 import java.awt.*;
 
 public class Start {
@@ -7,6 +8,12 @@ public class Start {
     public static void main(String[] args) {
         // verify and connect to db
         ConnectionManager.getInstance();
+
+        // use native look and feel if available
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception ignored) {
+        }
 
         EventQueue.invokeLater(new Runnable() {
             @Override

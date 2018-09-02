@@ -58,28 +58,19 @@ public class LoginUI extends JFrame implements ActionListener {
 
     private void bind() {
         loginButton.addActionListener(this);
+        passwordTf.addActionListener(this);
     }
 
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == loginButton) {
-            if (verifyLogin()) {
-                // launch the manage window
-                JOptionPane.showMessageDialog(this,
-                        "Logged in!");
-            } else {
-                JOptionPane.showMessageDialog(this,
-                        "Invalid username or password. Please try again.");
-
-                // clear the text fields
-                usernameTf.setText("");
-                passwordTf.setText("");
-            }
+        Object src = e.getSource();
+        if (src == loginButton) {
+            verifyLogin();
+        } else if (src == passwordTf) {
+            verifyLogin();
         }
     }
 
-    private boolean verifyLogin() {
-        boolean verified = false;
-
+    private void verifyLogin() {
         String username = usernameTf.getText();
         String password = new String(passwordTf.getPassword());
 
@@ -93,13 +84,33 @@ public class LoginUI extends JFrame implements ActionListener {
 
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
-                verified = true;
+                String status = rs.getString("status");
+                if (status.equals("employee")) {
+                    UserLoginInfo info = new UserLoginInfo();
+                    info.name = rs.getString("name");
+                    info.username = rs.getString("username");
+                    info.status = status;
+
+                    new EmployeeUI(info).setVisible(true);
+                    setVisible(false);
+                    dispose();
+                } else if (status.equals("customer")) {
+
+                }
+            } else {
+                JOptionPane.showMessageDialog(this,
+                        "Invalid username or password. Please try again.");
+
+                // clear the text fields
+                usernameTf.setText("");
+                passwordTf.setText("");
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }
 
-        return verified;
+            JOptionPane.showMessageDialog(this,
+                    "Error! Failed to query database.");
+        }
     }
 
 }
