@@ -227,12 +227,16 @@ public class EmployeeEditorUI extends UserBaseUI {
             ps.setString(1, username);
 
             System.out.println(ps);
-            ps.execute();
-            JOptionPane.showMessageDialog(this, "Success!");
+            int count = ps.executeUpdate();
 
-            new EmployeeUI(userLoginInfo).setVisible(true);
-            setVisible(false);
-            dispose();
+            if (count > 0) {
+                JOptionPane.showMessageDialog(this, "Success!");
+                new EmployeeUI(userLoginInfo).setVisible(true);
+                setVisible(false);
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Error! Wrong username.");
+            }
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Error! Failed to delete employee.");

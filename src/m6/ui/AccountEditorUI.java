@@ -187,27 +187,30 @@ public class AccountEditorUI extends UserBaseUI {
         PreparedStatement ps, psCustomer = null, psTransaction = null;
         try {
             ps = conn.prepareStatement(deleteQuery);
-            ps.setString(1, accountNumber);
+            ps.setString(1, accountNumberTf.getText().trim());
 
             psCustomer = conn.prepareStatement(deleteCustomerQuery);
-            psCustomer.setString(1, accountNumber);
+            psCustomer.setString(1, accountNumberTf.getText().trim());
 
             psTransaction = conn.prepareStatement(deleteTransactionQuery);
-            psTransaction.setString(1, accountNumber);
+            psTransaction.setString(1, accountNumberTf.getText().trim());
 
             System.out.println(ps);
             System.out.println(psCustomer);
             System.out.println(psTransaction);
 
-            ps.execute();
+            int count = ps.executeUpdate();
             psCustomer.execute();
             psTransaction.execute();
 
-            JOptionPane.showMessageDialog(this, "Success!");
-
-            new EmployeeUI(userLoginInfo).setVisible(true);
-            setVisible(false);
-            dispose();
+            if (count > 0) {
+                JOptionPane.showMessageDialog(this, "Success!");
+                new EmployeeUI(userLoginInfo).setVisible(true);
+                setVisible(false);
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Error! Wrong account number.");
+            }
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Error! Failed to delete account.");
