@@ -88,18 +88,18 @@ public class LoginUI extends JFrame implements ActionListener {
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
                 String status = rs.getString("status");
+                UserLoginInfo info = new UserLoginInfo();
+                info.name = rs.getString("name");
+                info.username = rs.getString("username");
+                info.status = status;
+
                 if (status.equals("employee")) {
-                    UserLoginInfo info = new UserLoginInfo();
-                    info.name = rs.getString("name");
-                    info.username = rs.getString("username");
-                    info.status = status;
-
                     new EmployeeUI(info).setVisible(true);
-                    setVisible(false);
-                    dispose();
                 } else if (status.equals("customer")) {
-
+                    new CustomerUI(info).setVisible(true);
                 }
+                setVisible(false);
+                dispose();
             } else {
                 JOptionPane.showMessageDialog(this,
                         "Invalid username or password. Please try again.");

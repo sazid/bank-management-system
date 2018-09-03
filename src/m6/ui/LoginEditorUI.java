@@ -142,7 +142,11 @@ public class LoginEditorUI extends UserBaseUI {
         Object src = e.getSource();
 
         if (src == backButton) {
-            new EmployeeUI(userLoginInfo).setVisible(true);
+            if (userLoginInfo.status == "employee") {
+                new EmployeeUI(userLoginInfo).setVisible(true);
+            } else {
+                new CustomerUI(userLoginInfo).setVisible(true);
+            }
             setVisible(false);
             dispose();
         } else if (src == saveBtn) {
