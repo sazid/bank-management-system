@@ -16,6 +16,7 @@ public class AccountTableModel extends AbstractTableModel {
     private JFrame ui;
 
     public AccountTableModel(JFrame ui) {
+        columnNames.add("Username");
         columnNames.add("Account Holder");
         columnNames.add("Account Number");
         columnNames.add("Balance");
@@ -31,7 +32,7 @@ public class AccountTableModel extends AbstractTableModel {
 
         try {
             PreparedStatement ps = conn.prepareStatement(
-                    "SELECT login.name, account.accountNumber, account.balance FROM account, customer, login " +
+                    "SELECT login.name, login.username, account.accountNumber, account.balance FROM account, customer, login " +
                             "WHERE account.accountNumber=customer.accountNumber AND login.username=customer.username " +
                             "ORDER BY login.name ASC"
             );
@@ -39,10 +40,11 @@ public class AccountTableModel extends AbstractTableModel {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 String name = rs.getString("login.name");
+                String username = rs.getString("login.username");
                 String accountNumber = rs.getString("account.accountNumber");
                 double balance = rs.getDouble("account.balance");
 
-                v.add(new Object[]{name, accountNumber, balance});
+                v.add(new Object[]{username, name, accountNumber, balance});
             }
         } catch (SQLException e) {
             e.printStackTrace();

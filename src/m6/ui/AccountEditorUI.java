@@ -46,27 +46,27 @@ public class AccountEditorUI extends UserBaseUI {
     }
 
     private void initUI() {
-        int x = 200;
+        int x = 180;
         int y = 180;
 
         accountNumberLabel = new StyledLabel("Account Number: ");
-        accountNumberLabel.setBounds(x, y, 100, 30);
+        accountNumberLabel.setBounds(x, y, 120, 30);
 
         accountNumberTf = new StyledTextField();
-        accountNumberTf.setBounds(x + 110, y, 200, 30);
+        accountNumberTf.setBounds(x + 130, y, 200, 30);
 
         balanceLabel = new StyledLabel("Balance: ");
         balanceLabel.setBounds(x, y + 40, 100, 30);
 
         balanceTf = new StyledTextField();
-        balanceTf.setBounds(x + 110, y + 40, 200, 30);
+        balanceTf.setBounds(x + 130, y + 40, 200, 30);
 
         saveBtn = new StyledButton("Save");
-        saveBtn.setBounds(x + 110, y + 40 + 40, 200, 35);
+        saveBtn.setBounds(x + 130, y + 40 + 40, 200, 35);
 
         deleteBtn = new StyledButton("Delete");
         deleteBtn.setBackground(new Color(0xF35E5F));
-        deleteBtn.setBounds(x + 110, y + 40 + 40 + 40, 200, 35);
+        deleteBtn.setBounds(x + 130, y + 40 + 40 + 40, 200, 35);
         if (accountNumber == null || accountNumber.isEmpty()) {
             deleteBtn.setVisible(false);
         }
@@ -94,7 +94,7 @@ public class AccountEditorUI extends UserBaseUI {
             ps.setString(1, accountNumber);
 
             ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
+            if (rs.next()) {
                 String accountNumber = rs.getString("accountNumber");
                 double balance = rs.getDouble("balance");
 
@@ -105,7 +105,7 @@ public class AccountEditorUI extends UserBaseUI {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Error! Failed to fetch data.");
 
-            new EmployeeUI(userLoginInfo).setVisible(true);
+            new AccountsViewerUI(userLoginInfo).setVisible(true);
             setVisible(false);
             dispose();
         }
@@ -116,7 +116,7 @@ public class AccountEditorUI extends UserBaseUI {
         Object src = e.getSource();
 
         if (src == backButton) {
-            new EmployeeUI(userLoginInfo).setVisible(true);
+            new AccountsViewerUI(userLoginInfo).setVisible(true);
             setVisible(false);
             dispose();
         } else if (src == saveBtn) {
@@ -158,7 +158,7 @@ public class AccountEditorUI extends UserBaseUI {
             System.out.println(ps);
             ps.execute();
 
-            if (psCustomer != null && psTransaction != null) {
+            if (psCustomer != null) {
                 System.out.println(psCustomer);
                 psCustomer.execute();
 
@@ -168,7 +168,7 @@ public class AccountEditorUI extends UserBaseUI {
 
             JOptionPane.showMessageDialog(this, "Success!");
 
-            new EmployeeUI(userLoginInfo).setVisible(true);
+            new AccountsViewerUI(userLoginInfo).setVisible(true);
             setVisible(false);
             dispose();
         } catch (Exception e) {
@@ -184,7 +184,7 @@ public class AccountEditorUI extends UserBaseUI {
         String deleteTransactionQuery = "DELETE FROM transaction WHERE accountNumber=?";
 
         Connection conn = ConnectionManager.getInstance().getConnection();
-        PreparedStatement ps, psCustomer = null, psTransaction = null;
+        PreparedStatement ps, psCustomer, psTransaction;
         try {
             ps = conn.prepareStatement(deleteQuery);
             ps.setString(1, accountNumberTf.getText().trim());
@@ -205,7 +205,7 @@ public class AccountEditorUI extends UserBaseUI {
 
             if (count > 0) {
                 JOptionPane.showMessageDialog(this, "Success!");
-                new EmployeeUI(userLoginInfo).setVisible(true);
+                new AccountsViewerUI(userLoginInfo).setVisible(true);
                 setVisible(false);
                 dispose();
             } else {

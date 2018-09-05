@@ -19,9 +19,8 @@ import java.awt.event.ActionListener;
 public class UserBaseUI extends JFrame implements ActionListener {
 
     public JPanel mainPanel;
-    public StyledButton backButton;
+    public StyledButton backButton, logoutButton;
     private StyledLabel titleLabel, nameLabel, extraInfoLabel;
-    private StyledButton logoutButton;
     private UserLoginInfo loginInfo;
     private JSeparator separator = new JSeparator();
 
@@ -48,11 +47,10 @@ public class UserBaseUI extends JFrame implements ActionListener {
         mainPanel.setBackground(Color.white);
 
         titleLabel = new StyledLabel("Bank Management System");
-        titleLabel.setFont(new Font("Courier", Font.BOLD, 16));
-        titleLabel.setBounds(10, 0, 500, 35);
+        titleLabel.setFont(new Font("Calibri", Font.BOLD, 24));
+        titleLabel.setBounds(10, 5, 500, 35);
 
         nameLabel = new StyledLabel("Logged in as: " + loginInfo.name);
-        nameLabel.setFont(new Font("Courier", Font.BOLD, 12));
         nameLabel.setBounds(10, 35, 200, 20);
 
         logoutButton = new StyledButton("Logout");
@@ -62,7 +60,7 @@ public class UserBaseUI extends JFrame implements ActionListener {
         backButton.setBounds(560, 16, 100, 35);
         backButton.setVisible(false);
 
-        separator.setBounds(0, 65, 800, 5);
+        separator.setBounds(0, 65, 1024, 5);
         separator.setForeground(new Color(0x2d9f98));
 
         mainPanel.add(titleLabel);

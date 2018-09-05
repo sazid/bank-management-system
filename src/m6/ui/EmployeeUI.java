@@ -19,7 +19,7 @@ public class EmployeeUI extends UserBaseUI {
 
     private UserLoginInfo userLoginInfo;
 
-    private StyledButton viewAccountBtn, editAccountBtn, addAccountBtn,
+    private StyledButton viewAccountBtn,
             viewCustomerBtn, editCustomerBtn, addCustomerBtn,
             viewEmployeeBtn, editEmployeeBtn, addEmployeeBtn,
             viewLoginBtn, editLoginBtn, addLoginBtn,
@@ -43,13 +43,7 @@ public class EmployeeUI extends UserBaseUI {
 
         // Accounts
         viewAccountBtn = new StyledButton("View Accounts");
-        viewAccountBtn.setBounds(x, 150, buttonWidth, buttonHeight);
-
-        addAccountBtn = new StyledButton("Add Account");
-        addAccountBtn.setBounds(x + 150, 150, buttonWidth, buttonHeight);
-
-        editAccountBtn = new StyledButton("Edit Account");
-        editAccountBtn.setBounds(x + 2 * 150, 150, buttonWidth, buttonHeight);
+        viewAccountBtn.setBounds(x + 2 * 150, 150, buttonWidth, buttonHeight);
 
         // Customers
         viewCustomerBtn = new StyledButton("View Customers");
@@ -88,8 +82,6 @@ public class EmployeeUI extends UserBaseUI {
         myInfoBtn.setBounds(x, 350, 430, buttonHeight);
 
         mainPanel.add(viewAccountBtn);
-        mainPanel.add(addAccountBtn);
-        mainPanel.add(editAccountBtn);
 
         mainPanel.add(viewCustomerBtn);
         mainPanel.add(addCustomerBtn);
@@ -108,8 +100,6 @@ public class EmployeeUI extends UserBaseUI {
 
     private void bind() {
         viewAccountBtn.addActionListener(this);
-        addAccountBtn.addActionListener(this);
-        editAccountBtn.addActionListener(this);
 
         viewCustomerBtn.addActionListener(this);
         addCustomerBtn.addActionListener(this);
@@ -144,21 +134,6 @@ public class EmployeeUI extends UserBaseUI {
             dispose();
         } else if (src == viewLoginBtn) {
             new LoginViewerUI(userLoginInfo).setVisible(true);
-            setVisible(false);
-            dispose();
-        } else if (src == editAccountBtn) {
-            String accountNumber = JOptionPane.showInputDialog(this,"Account Number: ");
-
-            if (verifyAccountNumber(accountNumber)) {
-                new AccountEditorUI(userLoginInfo, accountNumber).setVisible(true);
-                setVisible(false);
-                dispose();
-            } else {
-                JOptionPane.showMessageDialog(this,
-                        "Account not found or account not specified.");
-            }
-        } else if (src == addAccountBtn) {
-            new AccountEditorUI(userLoginInfo, null).setVisible(true);
             setVisible(false);
             dispose();
         } else if (src == addEmployeeBtn) {

@@ -28,6 +28,7 @@ public class LoginUI extends JFrame implements ActionListener {
         super("Bank Management System | Login");
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setResizable(false);
         setSize(800, 500);
 
         initUI();
