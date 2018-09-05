@@ -4,6 +4,7 @@ import m6.ConnectionManager;
 import m6.UserLoginInfo;
 import m6.components.StyledButton;
 import m6.components.StyledLabel;
+import m6.components.StyledTextField;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,10 +17,10 @@ import java.sql.SQLException;
 
 public class LoginUI extends JFrame implements ActionListener {
 
-    private JPanel panel;
+    private JPanel panelLeft, panelRight;
     private StyledLabel introLabel, usernameLabel, passwordLabel;
     private StyledButton loginButton;
-    private JTextField usernameTf;
+    private StyledTextField usernameTf;
     private JPasswordField passwordTf;
 
     public LoginUI() {
@@ -33,35 +34,49 @@ public class LoginUI extends JFrame implements ActionListener {
     }
 
     private void initUI() {
-        panel = new JPanel();
-        panel.setLayout(null);
+        panelLeft = new JPanel();
+        panelLeft.setBackground(new Color(0x2dce98));
+        panelLeft.setBounds(0, 0, 400, 500);
+        panelLeft.setLayout(null);
 
-        introLabel = new StyledLabel("Bank Management System");
-        introLabel.setFont(new Font("Calibri", Font.PLAIN, 24));
-        introLabel.setBounds(250, 40, 400, 50);
+        panelRight = new JPanel();
+        panelRight.setBackground(Color.white);
+        panelRight.setBounds(400, 0, 400, 500);
+        panelRight.setLayout(null);
+
+
+        introLabel = new StyledLabel("<html><body><strong>Bank<br>Management<br>System</body></html>");
+        introLabel.setForeground(Color.white);
+        introLabel.setFont(new Font("Calibri", Font.PLAIN, 38));
+        introLabel.setBounds(60, 20, 350, 400);
+
+        int x = 480;
 
         usernameLabel = new StyledLabel("Username: ");
-        usernameLabel.setBounds(230, 180, 200, 30);
+        usernameLabel.setBounds(x - 20, 180, 200, 30);
 
-        usernameTf = new JTextField();
-        usernameTf.setBounds(300, 180, 200, 30);
+        usernameTf = new StyledTextField();
+        usernameTf.setBounds(x + 50, 180, 200, 30);
 
         passwordLabel = new StyledLabel("Password: ");
-        passwordLabel.setBounds(230, 220, 200, 30);
+        passwordLabel.setBounds(x - 20, 220, 200, 30);
 
         passwordTf = new JPasswordField();
-        passwordTf.setBounds(300, 220, 200, 30);
+        passwordTf.setBounds(x + 50, 220, 200, 30);
 
         loginButton = new StyledButton("Login");
-        loginButton.setBounds(300, 260, 200, 35);
+        loginButton.setBounds(x + 50, 260, 200, 35);
 
-        panel.add(introLabel);
-        panel.add(usernameLabel);
-        panel.add(passwordLabel);
-        panel.add(usernameTf);
-        panel.add(passwordTf);
-        panel.add(loginButton);
-        add(panel);
+        panelLeft.add(introLabel);
+
+        panelRight.add(usernameLabel);
+        panelRight.add(passwordLabel);
+        panelRight.add(usernameTf);
+        panelRight.add(passwordTf);
+        panelRight.add(loginButton);
+
+        add(panelLeft);
+        add(panelRight);
     }
 
     private void bind() {
