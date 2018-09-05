@@ -32,6 +32,8 @@ public class LoginUI extends JFrame implements ActionListener {
 
         initUI();
         bind();
+
+        setLocationRelativeTo(null);
     }
 
     private void initUI() {

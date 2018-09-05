@@ -31,9 +31,12 @@ public class UserBaseUI extends JFrame implements ActionListener {
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(800, 500);
+        setResizable(false);
 
         initBaseUI();
         bindBaseUI();
+
+        setLocationRelativeTo(null);
     }
 
     /**
