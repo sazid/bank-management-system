@@ -3,10 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="0540ce07-aacd-4a02-9201-7e40194d1012" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BankManagementSystem/m6/Start$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BankManagementSystem/m6/Start$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BankManagementSystem/m6/Start.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BankManagementSystem/m6/Start.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/m6/components/StyledButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/m6/components/StyledButton.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/m6/ui/LoginUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/m6/ui/LoginUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/m6/components/StyledPasswordField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/m6/components/StyledPasswordField.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/m6/components/StyledTextField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/m6/components/StyledTextField.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -43,25 +41,25 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="java" value="88" />
+          <entry key="java" value="95" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JAVA" value="88" />
+          <entry key="JAVA" value="95" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="4" />
-          <entry key="java" value="18677" />
-          <entry key="txt" value="346" />
+          <entry key="java" value="18807" />
+          <entry key="txt" value="405" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="18669" />
-          <entry key="PLAIN_TEXT" value="350" />
+          <entry key="JAVA" value="18799" />
+          <entry key="PLAIN_TEXT" value="409" />
           <entry key="SQL" value="8" />
         </counts>
       </usages-collector>
@@ -72,11 +70,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/m6/ui/LoginUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
-              <caret line="49" column="61" selection-start-line="49" selection-start-column="61" selection-end-line="49" selection-end-column="61" />
+            <state relative-caret-position="553">
+              <caret line="81" lean-forward="true" selection-start-line="81" selection-end-line="81" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/m6/components/StyledTextField.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="324">
+              <caret line="18" selection-start-line="18" selection-end-line="18" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -85,10 +95,22 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/m6/components/StyledButton.java">
+        <entry file="file://$PROJECT_DIR$/src/m6/components/StyledButtonUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="19" column="37" selection-start-line="19" selection-start-column="37" selection-end-line="19" selection-end-column="37" />
+            <state relative-caret-position="576">
+              <caret line="32" column="5" lean-forward="true" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="5" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/m6/components/StyledPasswordField.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="324">
+              <caret line="18" selection-start-line="18" selection-end-line="18" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -121,13 +143,16 @@
       <find>JTextField</find>
       <find>JButton</find>
       <find>30</find>
+      <find>save</find>
+      <find>JPasswordField</find>
     </findStrings>
     <replaceStrings>
       <replace>y</replace>
       <replace>StyledLabel</replace>
       <replace>StyledTextField</replace>
-      <replace>StyledButton</replace>
       <replace>35</replace>
+      <replace>StyledPasswordField</replace>
+      <replace>StyledButton</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -157,18 +182,19 @@
         <option value="$PROJECT_DIR$/src/m6/ui/StyledButtonUI.java" />
         <option value="$PROJECT_DIR$/src/m6/components/StyledButtonUI.java" />
         <option value="$PROJECT_DIR$/src/m6/components/StyledLabel.java" />
-        <option value="$PROJECT_DIR$/src/m6/components/StyledTextField.java" />
-        <option value="$PROJECT_DIR$/src/m6/ui/AccountEditorUI.java" />
-        <option value="$PROJECT_DIR$/src/m6/ui/CustomerEditorUI.java" />
         <option value="$PROJECT_DIR$/src/m6/ui/CustomerUI.java" />
-        <option value="$PROJECT_DIR$/src/m6/ui/EmployeeEditorUI.java" />
         <option value="$PROJECT_DIR$/src/m6/ui/EmployeeUI.java" />
-        <option value="$PROJECT_DIR$/src/m6/ui/LoginEditorUI.java" />
         <option value="$PROJECT_DIR$/src/m6/ui/UserBaseUI.java" />
         <option value="$PROJECT_DIR$/src/m6/Start.java" />
         <option value="$PROJECT_DIR$/src/m6/ConnectionManager.java" />
         <option value="$PROJECT_DIR$/src/m6/components/StyledButton.java" />
+        <option value="$PROJECT_DIR$/src/m6/ui/EmployeeEditorUI.java" />
+        <option value="$PROJECT_DIR$/src/m6/ui/CustomerEditorUI.java" />
+        <option value="$PROJECT_DIR$/src/m6/ui/AccountEditorUI.java" />
+        <option value="$PROJECT_DIR$/src/m6/ui/LoginEditorUI.java" />
         <option value="$PROJECT_DIR$/src/m6/ui/LoginUI.java" />
+        <option value="$PROJECT_DIR$/src/m6/components/StyledPasswordField.java" />
+        <option value="$PROJECT_DIR$/src/m6/components/StyledTextField.java" />
       </list>
     </option>
   </component>
@@ -242,7 +268,7 @@
     <property name="DatabaseDriversLRU" value="mariadb" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1536177502454" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1536178471073" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -398,17 +424,31 @@
       <option name="project" value="LOCAL" />
       <updated>1536176466312</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Redesign login ui">
+      <created>1536177548437</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1536177548437</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Rounded border for text/password fields">
+      <created>1536178383321</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1536178383321</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="56392000" />
+    <option name="totallyTimeSpent" value="57348000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49918434" visible="true" weight="0.1641791" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49918434" visible="true" weight="0.1641791" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -417,7 +457,7 @@
       <window_info id="Favorites" order="6" sideWeight="0.5008157" side_tool="true" weight="0.2713348" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32936078" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4989339" visible="true" weight="0.248104" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4989339" visible="true" weight="0.248104" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3997833" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -461,10 +501,16 @@
     <MESSAGE value="Add user edit" />
     <MESSAGE value="My info button" />
     <MESSAGE value="Custom UI elements" />
-    <option name="LAST_COMMIT_MESSAGE" value="Custom UI elements" />
+    <MESSAGE value="Redesign login ui" />
+    <MESSAGE value="Rounded border for text/password fields" />
+    <option name="LAST_COMMIT_MESSAGE" value="Rounded border for text/password fields" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
+  </component>
+  <component name="antWorkspaceConfiguration">
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
+    <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/m6/UserLoginInfo.java">
@@ -539,35 +585,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/m6/components/StyledTextField.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#306#307#0" expanded="true" />
-            <element signature="e#366#367#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/m6/components/StyledButtonUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="30" column="38" lean-forward="true" selection-start-line="30" selection-start-column="38" selection-end-line="30" selection-end-column="38" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/m6/ui/AccountEditorUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="113">
-          <caret line="61" lean-forward="true" selection-start-line="61" selection-end-line="61" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/m6/ui/AccountsViewerUI.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="37">
@@ -631,20 +648,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/m6/ui/EmployeeEditorUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="257">
-          <caret line="82" column="47" lean-forward="true" selection-start-line="82" selection-start-column="47" selection-end-line="82" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/m6/ui/LoginEditorUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="84" column="40" lean-forward="true" selection-start-line="84" selection-start-column="40" selection-end-line="84" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/m6/Start.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
@@ -661,8 +664,39 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/m6/ui/CustomerEditorUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="617">
-          <caret line="81" column="9" lean-forward="true" selection-start-line="81" selection-start-column="9" selection-end-line="81" selection-end-column="9" />
+        <state relative-caret-position="231">
+          <caret line="121" column="13" selection-start-line="121" selection-start-column="12" selection-end-line="121" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/m6/ui/EmployeeEditorUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="167">
+          <caret line="77" lean-forward="true" selection-start-line="77" selection-end-line="77" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/m6/ui/LoginEditorUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="25" column="31" selection-start-line="25" selection-start-column="31" selection-end-line="25" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/m6/components/StyledButtonUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="576">
+          <caret line="32" column="5" lean-forward="true" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/m6/ui/AccountEditorUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="159">
+          <caret line="101" column="59" lean-forward="true" selection-start-line="101" selection-start-column="59" selection-end-line="101" selection-end-column="59" />
         </state>
       </provider>
     </entry>
@@ -678,8 +712,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/m6/ui/LoginUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="49" column="61" selection-start-line="49" selection-start-column="61" selection-end-line="49" selection-end-column="61" />
+        <state relative-caret-position="553">
+          <caret line="81" lean-forward="true" selection-start-line="81" selection-end-line="81" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/m6/components/StyledPasswordField.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="18" selection-start-line="18" selection-end-line="18" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/m6/components/StyledTextField.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="18" selection-start-line="18" selection-end-line="18" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

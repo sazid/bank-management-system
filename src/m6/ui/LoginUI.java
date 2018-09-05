@@ -4,6 +4,7 @@ import m6.ConnectionManager;
 import m6.UserLoginInfo;
 import m6.components.StyledButton;
 import m6.components.StyledLabel;
+import m6.components.StyledPasswordField;
 import m6.components.StyledTextField;
 
 import javax.swing.*;
@@ -21,7 +22,7 @@ public class LoginUI extends JFrame implements ActionListener {
     private StyledLabel introLabel, usernameLabel, passwordLabel;
     private StyledButton loginButton;
     private StyledTextField usernameTf;
-    private JPasswordField passwordTf;
+    private StyledPasswordField passwordTf;
 
     public LoginUI() {
         super("Bank Management System | Login");
@@ -61,11 +62,11 @@ public class LoginUI extends JFrame implements ActionListener {
         passwordLabel = new StyledLabel("Password: ");
         passwordLabel.setBounds(x - 20, 220, 200, 30);
 
-        passwordTf = new JPasswordField();
+        passwordTf = new StyledPasswordField();
         passwordTf.setBounds(x + 50, 220, 200, 30);
 
         loginButton = new StyledButton("Login");
-        loginButton.setBounds(x + 50, 260, 200, 35);
+        loginButton.setBounds(x + 50, 260, 200, 40);
 
         panelLeft.add(introLabel);
 

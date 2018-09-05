@@ -77,11 +77,10 @@ public class EmployeeEditorUI extends UserBaseUI {
         salaryTf.setBounds(x + 110, y + 40 * 3, 200, 30);
 
         saveBtn = new StyledButton("Save");
-        saveBtn.setBackground(Color.GREEN);
         saveBtn.setBounds(x + 110, y + 40 * 4, 200, 30);
 
         deleteBtn = new StyledButton("Delete");
-        deleteBtn.setBackground(Color.RED);
+        deleteBtn.setBackground(new Color(0xF35E5F));
         deleteBtn.setBounds(x + 110, y + 40 * 5, 200, 30);
         if (username == null || username.isEmpty()) {
             deleteBtn.setVisible(false);

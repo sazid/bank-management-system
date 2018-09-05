@@ -4,6 +4,7 @@ import m6.ConnectionManager;
 import m6.UserLoginInfo;
 import m6.components.StyledButton;
 import m6.components.StyledLabel;
+import m6.components.StyledPasswordField;
 import m6.components.StyledTextField;
 
 import javax.swing.*;
@@ -22,7 +23,7 @@ public class LoginEditorUI extends UserBaseUI {
     private StyledButton saveBtn, deleteBtn;
     private StyledLabel usernameLabel, passwordLabel, statusLabel, nameLabel;
     private StyledTextField usernameTf, statusTf, nameTf;
-    private JPasswordField passwordTf;
+    private StyledPasswordField passwordTf;
 
     public LoginEditorUI(UserLoginInfo userLoginInfo, String username) {
         super(userLoginInfo);
@@ -62,7 +63,7 @@ public class LoginEditorUI extends UserBaseUI {
         passwordLabel = new StyledLabel("Password: ");
         passwordLabel.setBounds(x, y + 40, 100, 30);
 
-        passwordTf = new JPasswordField();
+        passwordTf = new StyledPasswordField();
         passwordTf.setBounds(x + 110, y + 40, 200, 30);
 
         statusLabel = new StyledLabel("Status: ");
@@ -78,11 +79,10 @@ public class LoginEditorUI extends UserBaseUI {
         nameTf.setBounds(x + 110, y + 40 * 3, 200, 30);
 
         saveBtn = new StyledButton("Save");
-        saveBtn.setBackground(Color.GREEN);
         saveBtn.setBounds(x + 110, y + 40 * 4, 200, 30);
 
         deleteBtn = new StyledButton("Delete");
-        deleteBtn.setBackground(Color.RED);
+        deleteBtn.setBackground(new Color(0xF35E5F));
         deleteBtn.setBounds(x + 110, y + 40 * 5, 200, 30);
         if (username == null || username.isEmpty()) {
             deleteBtn.setVisible(false);
@@ -252,6 +252,6 @@ public class LoginEditorUI extends UserBaseUI {
             JOptionPane.showMessageDialog(this, "Error! Failed to delete customer.");
         }
     }
-    
+
 }
 

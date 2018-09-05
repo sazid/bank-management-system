@@ -62,11 +62,10 @@ public class AccountEditorUI extends UserBaseUI {
         balanceTf.setBounds(x + 110, y + 40, 200, 30);
 
         saveBtn = new StyledButton("Save");
-        saveBtn.setBackground(Color.GREEN);
         saveBtn.setBounds(x + 110, y + 40 + 40, 200, 30);
 
         deleteBtn = new StyledButton("Delete");
-        deleteBtn.setBackground(Color.RED);
+        deleteBtn.setBackground(new Color(0xF35E5F));
         deleteBtn.setBounds(x + 110, y + 40 + 40 + 40, 200, 30);
         if (accountNumber == null || accountNumber.isEmpty()) {
             deleteBtn.setVisible(false);

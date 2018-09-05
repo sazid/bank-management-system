@@ -4,16 +4,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.RoundRectangle2D;
 
-public class StyledTextField extends JTextField {
+public class StyledPasswordField extends JPasswordField {
     private Shape shape;
 
-    public StyledTextField() {
+    public StyledPasswordField() {
         super();
         setOpaque(false);
         initStyles();
     }
 
-    public StyledTextField(String s) {
+    public StyledPasswordField(String s) {
         super(s);
         setOpaque(false);
         initStyles();
