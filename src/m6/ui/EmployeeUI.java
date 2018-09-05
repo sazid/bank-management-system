@@ -37,52 +37,55 @@ public class EmployeeUI extends UserBaseUI {
     }
 
     private void initUI() {
-        final int x = 190;
+        final int x = 170;
+        final int buttonHeight = 35;
+        final int buttonWidth = 130;
+
         // Accounts
         viewAccountBtn = new StyledButton("View Accounts");
-        viewAccountBtn.setBounds(x, 150, 120, 30);
+        viewAccountBtn.setBounds(x, 150, buttonWidth, buttonHeight);
 
         addAccountBtn = new StyledButton("Add Account");
-        addAccountBtn.setBounds(x + 140, 150, 120, 30);
+        addAccountBtn.setBounds(x + 150, 150, buttonWidth, buttonHeight);
 
         editAccountBtn = new StyledButton("Edit Account");
-        editAccountBtn.setBounds(x + 2 * 140, 150, 120, 30);
+        editAccountBtn.setBounds(x + 2 * 150, 150, buttonWidth, buttonHeight);
 
         // Customers
         viewCustomerBtn = new StyledButton("View Customers");
-        viewCustomerBtn.setBounds(x, 200, 120, 30);
+        viewCustomerBtn.setBounds(x, 200, buttonWidth, buttonHeight);
 
         addCustomerBtn = new StyledButton("Add Customers");
-        addCustomerBtn.setBounds(x + 140, 200, 120, 30);
+        addCustomerBtn.setBounds(x + 150, 200, buttonWidth, buttonHeight);
 
         editCustomerBtn = new StyledButton("Edit Customer");
-        editCustomerBtn.setBounds(x + 2 * 140, 200, 120, 30);
+        editCustomerBtn.setBounds(x + 2 * 150, 200, buttonWidth, buttonHeight);
 
         // Employees
         viewEmployeeBtn = new StyledButton("View Employees");
-        viewEmployeeBtn.setBounds(x, 250, 120, 30);
+        viewEmployeeBtn.setBounds(x, 250, buttonWidth, buttonHeight);
         viewEmployeeBtn.setVisible(false);
 
         addEmployeeBtn = new StyledButton("Add Employee");
-        addEmployeeBtn.setBounds(x + 140, 250, 120, 30);
+        addEmployeeBtn.setBounds(x + 150, 250, buttonWidth, buttonHeight);
         addEmployeeBtn.setVisible(false);
 
         editEmployeeBtn = new StyledButton("Edit Employee");
-        editEmployeeBtn.setBounds(x + 2 * 140, 250, 120, 30);
+        editEmployeeBtn.setBounds(x + 2 * 150, 250, buttonWidth, buttonHeight);
         editEmployeeBtn.setVisible(false);
 
         // Users
         viewLoginBtn = new StyledButton("View Users");
-        viewLoginBtn.setBounds(x, 300, 120, 30);
+        viewLoginBtn.setBounds(x, 300, buttonWidth, buttonHeight);
 
         addLoginBtn = new StyledButton("Add User");
-        addLoginBtn.setBounds(x + 140, 300, 120, 30);
+        addLoginBtn.setBounds(x + 150, 300, buttonWidth, buttonHeight);
 
         editLoginBtn = new StyledButton("Edit User");
-        editLoginBtn.setBounds(x + 2 * 140, 300, 120, 30);
+        editLoginBtn.setBounds(x + 2 * 150, 300, buttonWidth, buttonHeight);
 
         myInfoBtn = new StyledButton("My Information");
-        myInfoBtn.setBounds(x, 350, 400, 30);
+        myInfoBtn.setBounds(x, 350, 430, buttonHeight);
 
         mainPanel.add(viewAccountBtn);
         mainPanel.add(addAccountBtn);

@@ -16,7 +16,7 @@ public class StyledButton extends JButton {
     }
 
     private void initStyles() {
-        setFont(new Font("Calibri", Font.PLAIN, 14));
+        setFont(new Font("Calibri", Font.BOLD, 14));
         setBackground(new Color(0x2dbe98));
         setForeground(Color.white);
         setUI(new StyledButtonUI());

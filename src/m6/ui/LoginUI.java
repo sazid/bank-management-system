@@ -54,13 +54,13 @@ public class LoginUI extends JFrame implements ActionListener {
         int x = 480;
 
         usernameLabel = new StyledLabel("Username: ");
-        usernameLabel.setBounds(x - 20, 180, 200, 30);
+        usernameLabel.setBounds(x - 25, 180, 200, 30);
 
         usernameTf = new StyledTextField();
         usernameTf.setBounds(x + 50, 180, 200, 30);
 
         passwordLabel = new StyledLabel("Password: ");
-        passwordLabel.setBounds(x - 20, 220, 200, 30);
+        passwordLabel.setBounds(x - 22, 220, 200, 30);
 
         passwordTf = new StyledPasswordField();
         passwordTf.setBounds(x + 50, 220, 200, 30);
