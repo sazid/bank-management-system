@@ -2,6 +2,9 @@ package m6.ui;
 
 import m6.ConnectionManager;
 import m6.UserLoginInfo;
+import m6.components.StyledButton;
+import m6.components.StyledLabel;
+import m6.components.StyledTextField;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,9 +19,9 @@ public class LoginEditorUI extends UserBaseUI {
     private UserLoginInfo userLoginInfo;
     private String username;
 
-    private JButton saveBtn, deleteBtn;
-    private JLabel usernameLabel, passwordLabel, statusLabel, nameLabel;
-    private JTextField usernameTf, statusTf, nameTf;
+    private StyledButton saveBtn, deleteBtn;
+    private StyledLabel usernameLabel, passwordLabel, statusLabel, nameLabel;
+    private StyledTextField usernameTf, statusTf, nameTf;
     private JPasswordField passwordTf;
 
     public LoginEditorUI(UserLoginInfo userLoginInfo, String username) {
@@ -47,38 +50,38 @@ public class LoginEditorUI extends UserBaseUI {
         int x = 200;
         int y = 140;
 
-        usernameLabel = new JLabel("Username: ");
+        usernameLabel = new StyledLabel("Username: ");
         usernameLabel.setBounds(x, y, 100, 30);
 
-        usernameTf = new JTextField();
+        usernameTf = new StyledTextField();
         usernameTf.setBounds(x + 110, y, 200, 30);
         if (username != null) {
             usernameTf.setEditable(false);
         }
 
-        passwordLabel = new JLabel("Password: ");
+        passwordLabel = new StyledLabel("Password: ");
         passwordLabel.setBounds(x, y + 40, 100, 30);
 
         passwordTf = new JPasswordField();
         passwordTf.setBounds(x + 110, y + 40, 200, 30);
 
-        statusLabel = new JLabel("Status: ");
+        statusLabel = new StyledLabel("Status: ");
         statusLabel.setBounds(x, y + 40 * 2, 100, 30);
 
-        statusTf = new JTextField();
+        statusTf = new StyledTextField();
         statusTf.setBounds(x + 110, y + 40 * 2, 200, 30);
 
-        nameLabel = new JLabel("Name: ");
+        nameLabel = new StyledLabel("Name: ");
         nameLabel.setBounds(x, y + 40 * 3, 100, 30);
 
-        nameTf = new JTextField();
+        nameTf = new StyledTextField();
         nameTf.setBounds(x + 110, y + 40 * 3, 200, 30);
 
-        saveBtn = new JButton("Save");
+        saveBtn = new StyledButton("Save");
         saveBtn.setBackground(Color.GREEN);
         saveBtn.setBounds(x + 110, y + 40 * 4, 200, 30);
 
-        deleteBtn = new JButton("Delete");
+        deleteBtn = new StyledButton("Delete");
         deleteBtn.setBackground(Color.RED);
         deleteBtn.setBounds(x + 110, y + 40 * 5, 200, 30);
         if (username == null || username.isEmpty()) {
@@ -142,7 +145,7 @@ public class LoginEditorUI extends UserBaseUI {
         Object src = e.getSource();
 
         if (src == backButton) {
-            if (userLoginInfo.status == "employee") {
+            if (userLoginInfo.status.equals("employee")) {
                 new EmployeeUI(userLoginInfo).setVisible(true);
             } else {
                 new CustomerUI(userLoginInfo).setVisible(true);
@@ -154,28 +157,6 @@ public class LoginEditorUI extends UserBaseUI {
         } else if (src == deleteBtn) {
             delete();
         }
-    }
-
-    private boolean verifyUsername(String username) {
-        Connection conn = ConnectionManager.getInstance().getConnection();
-        try {
-            PreparedStatement ps = conn.prepareStatement(
-                    "SELECT username FROM login WHERE username=?"
-            );
-            ps.setString(1, username);
-            System.out.println(ps);
-
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                rs.close();
-                ps.close();
-                return true;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return false;
     }
 
     private void save() {

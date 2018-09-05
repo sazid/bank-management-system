@@ -2,7 +2,9 @@ package m6.ui;
 
 import m6.ConnectionManager;
 import m6.UserLoginInfo;
-import m6.table_model.CustomerTableModel;
+import m6.components.StyledButton;
+import m6.components.StyledLabel;
+import m6.components.StyledTextField;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,16 +13,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Vector;
 
 public class AccountEditorUI extends UserBaseUI {
 
     private UserLoginInfo userLoginInfo;
     private String accountNumber;
 
-    private JButton saveBtn, deleteBtn;
-    private JLabel accountNumberLabel, balanceLabel;
-    private JTextField accountNumberTf, balanceTf;
+    private StyledButton saveBtn, deleteBtn;
+    private StyledLabel accountNumberLabel, balanceLabel;
+    private StyledTextField accountNumberTf, balanceTf;
 
     public AccountEditorUI(UserLoginInfo userLoginInfo, String accountNumber) {
         super(userLoginInfo);
@@ -48,23 +49,23 @@ public class AccountEditorUI extends UserBaseUI {
         int x = 200;
         int y = 180;
 
-        accountNumberLabel = new JLabel("Account Number: ");
+        accountNumberLabel = new StyledLabel("Account Number: ");
         accountNumberLabel.setBounds(x, y, 100, 30);
 
-        accountNumberTf = new JTextField();
+        accountNumberTf = new StyledTextField();
         accountNumberTf.setBounds(x + 110, y, 200, 30);
 
-        balanceLabel = new JLabel("Balance: ");
+        balanceLabel = new StyledLabel("Balance: ");
         balanceLabel.setBounds(x, y + 40, 100, 30);
 
-        balanceTf = new JTextField();
+        balanceTf = new StyledTextField();
         balanceTf.setBounds(x + 110, y + 40, 200, 30);
 
-        saveBtn = new JButton("Save");
+        saveBtn = new StyledButton("Save");
         saveBtn.setBackground(Color.GREEN);
         saveBtn.setBounds(x + 110, y + 40 + 40, 200, 30);
 
-        deleteBtn = new JButton("Delete");
+        deleteBtn = new StyledButton("Delete");
         deleteBtn.setBackground(Color.RED);
         deleteBtn.setBounds(x + 110, y + 40 + 40 + 40, 200, 30);
         if (accountNumber == null || accountNumber.isEmpty()) {

@@ -2,6 +2,9 @@ package m6.ui;
 
 import m6.ConnectionManager;
 import m6.UserLoginInfo;
+import m6.components.StyledButton;
+import m6.components.StyledLabel;
+import m6.components.StyledTextField;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,9 +19,9 @@ public class CustomerEditorUI extends UserBaseUI {
     private UserLoginInfo userLoginInfo;
     private String username;
 
-    private JButton saveBtn, deleteBtn;
-    private JLabel usernameLabel, phoneNumberLabel, accountNumberLabel;
-    private JTextField usernameTf, phoneNumberTf, accountNumberTf;
+    private StyledButton saveBtn, deleteBtn;
+    private StyledLabel usernameLabel, phoneNumberLabel, accountNumberLabel;
+    private StyledTextField usernameTf, phoneNumberTf, accountNumberTf;
 
     public CustomerEditorUI(UserLoginInfo userLoginInfo, String username) {
         super(userLoginInfo);
@@ -46,32 +49,32 @@ public class CustomerEditorUI extends UserBaseUI {
         int x = 200;
         int y = 140;
 
-        usernameLabel = new JLabel("Username: ");
+        usernameLabel = new StyledLabel("Username: ");
         usernameLabel.setBounds(x, y, 100, 30);
 
-        usernameTf = new JTextField();
+        usernameTf = new StyledTextField();
         usernameTf.setBounds(x + 110, y, 200, 30);
         if (username != null) {
             usernameTf.setEditable(false);
         }
 
-        phoneNumberLabel = new JLabel("Phone Number: ");
+        phoneNumberLabel = new StyledLabel("Phone Number: ");
         phoneNumberLabel.setBounds(x, y + 40, 100, 30);
 
-        phoneNumberTf = new JTextField();
+        phoneNumberTf = new StyledTextField();
         phoneNumberTf.setBounds(x + 110, y + 40, 200, 30);
 
-        accountNumberLabel = new JLabel("Account Number: ");
+        accountNumberLabel = new StyledLabel("Account Number: ");
         accountNumberLabel.setBounds(x, y + 40 * 2, 100, 30);
 
-        accountNumberTf = new JTextField();
+        accountNumberTf = new StyledTextField();
         accountNumberTf.setBounds(x + 110, y + 40 * 2, 200, 30);
 
-        saveBtn = new JButton("Save");
+        saveBtn = new StyledButton("Save");
         saveBtn.setBackground(Color.GREEN);
         saveBtn.setBounds(x + 110, y + 40 * 3, 200, 30);
 
-        deleteBtn = new JButton("Delete");
+        deleteBtn = new StyledButton("Delete");
         deleteBtn.setBackground(Color.RED);
         deleteBtn.setBounds(x + 110, y + 40 * 4, 200, 30);
         if (username == null || username.isEmpty()) {

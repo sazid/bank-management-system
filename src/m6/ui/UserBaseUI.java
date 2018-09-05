@@ -2,11 +2,13 @@ package m6.ui;
 
 import m6.ConnectionManager;
 import m6.UserLoginInfo;
-import m6.ui.LoginUI;
+import m6.components.StyledButton;
+import m6.components.StyledLabel;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * This class is responsible for showing the top title, name and logout button in
@@ -17,9 +19,9 @@ import java.awt.event.*;
 public class UserBaseUI extends JFrame implements ActionListener {
 
     public JPanel mainPanel;
-    private JLabel titleLabel, nameLabel, extraInfoLabel;
-    private JButton logoutButton;
-    public JButton backButton;
+    public StyledButton backButton;
+    private StyledLabel titleLabel, nameLabel, extraInfoLabel;
+    private StyledButton logoutButton;
     private UserLoginInfo loginInfo;
     private JSeparator separator = new JSeparator();
 
@@ -41,18 +43,18 @@ public class UserBaseUI extends JFrame implements ActionListener {
         mainPanel = new JPanel();
         mainPanel.setLayout(null);
 
-        titleLabel = new JLabel("Bank Management System");
+        titleLabel = new StyledLabel("Bank Management System");
         titleLabel.setFont(new Font("Courier", Font.BOLD, 16));
         titleLabel.setBounds(10, 0, 500, 35);
 
-        nameLabel = new JLabel("Logged in as: " + loginInfo.name);
+        nameLabel = new StyledLabel("Logged in as: " + loginInfo.name);
         nameLabel.setFont(new Font("Courier", Font.PLAIN, 12));
         nameLabel.setBounds(10, 35, 200, 20);
 
-        logoutButton = new JButton("Logout");
+        logoutButton = new StyledButton("Logout");
         logoutButton.setBounds(670, 16, 100, 30);
 
-        backButton = new JButton("Back");
+        backButton = new StyledButton("Back");
         backButton.setBounds(560, 16, 100, 30);
         backButton.setVisible(false);
 

@@ -2,6 +2,8 @@ package m6.ui;
 
 import m6.ConnectionManager;
 import m6.UserLoginInfo;
+import m6.components.StyledButton;
+import m6.components.StyledLabel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,8 +21,8 @@ public class CustomerUI extends UserBaseUI {
 
     private UserLoginInfo userLoginInfo;
 
-    private JLabel balanceLabel, balanceInfoLabel;
-    private JButton viewTransactionButton, cashOutButton, cashInButton, myInfoBtn;
+    private StyledLabel balanceLabel, balanceInfoLabel;
+    private StyledButton viewTransactionButton, cashOutButton, cashInButton, myInfoBtn;
 
     public CustomerUI(UserLoginInfo userLoginInfo) {
         super(userLoginInfo);
@@ -36,25 +38,25 @@ public class CustomerUI extends UserBaseUI {
     private void initUI() {
         final int x = 190;
 
-        balanceLabel = new JLabel("Balance: ");
+        balanceLabel = new StyledLabel("Balance: ");
         balanceLabel.setFont(new Font("Courier", Font.BOLD, 16));
         balanceLabel.setBounds(x, 200, 120, 30);
 
-        balanceInfoLabel = new JLabel();
+        balanceInfoLabel = new StyledLabel();
         balanceInfoLabel.setFont(new Font("Courier", Font.BOLD, 16));
         balanceInfoLabel.setBounds(x + 140, 200, 120, 30);
 
         // Accounts
-        viewTransactionButton = new JButton("View Transactions");
+        viewTransactionButton = new StyledButton("View Transactions");
         viewTransactionButton.setBounds(x, 250, 120, 30);
 
-        cashInButton = new JButton("Cash In");
+        cashInButton = new StyledButton("Cash In");
         cashInButton.setBounds(x + 140, 250, 120, 30);
 
-        cashOutButton = new JButton("Cash Out");
+        cashOutButton = new StyledButton("Cash Out");
         cashOutButton.setBounds(x + 2 * 140, 250, 120, 30);
 
-        myInfoBtn = new JButton("My Information");
+        myInfoBtn = new StyledButton("My Information");
         myInfoBtn.setBounds(x, 300, 400, 30);
 
         mainPanel.add(viewTransactionButton);

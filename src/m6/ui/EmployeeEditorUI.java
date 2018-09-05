@@ -2,6 +2,9 @@ package m6.ui;
 
 import m6.ConnectionManager;
 import m6.UserLoginInfo;
+import m6.components.StyledButton;
+import m6.components.StyledLabel;
+import m6.components.StyledTextField;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,9 +19,9 @@ public class EmployeeEditorUI extends UserBaseUI {
     private UserLoginInfo userLoginInfo;
     private String username;
 
-    private JButton saveBtn, deleteBtn;
-    private JLabel usernameLabel, phoneNumberLabel, roleLabel, salaryLabel;
-    private JTextField usernameTf, phoneNumberTf, roleTf, salaryTf;
+    private StyledButton saveBtn, deleteBtn;
+    private StyledLabel usernameLabel, phoneNumberLabel, roleLabel, salaryLabel;
+    private StyledTextField usernameTf, phoneNumberTf, roleTf, salaryTf;
 
     public EmployeeEditorUI(UserLoginInfo userLoginInfo, String username) {
         super(userLoginInfo);
@@ -46,38 +49,38 @@ public class EmployeeEditorUI extends UserBaseUI {
         int x = 200;
         int y = 140;
 
-        usernameLabel = new JLabel("Username: ");
+        usernameLabel = new StyledLabel("Username: ");
         usernameLabel.setBounds(x, y, 100, 30);
 
-        usernameTf = new JTextField();
+        usernameTf = new StyledTextField();
         usernameTf.setBounds(x + 110, y, 200, 30);
         if (username != null) {
             usernameTf.setEditable(false);
         }
 
-        phoneNumberLabel = new JLabel("Phone Number: ");
+        phoneNumberLabel = new StyledLabel("Phone Number: ");
         phoneNumberLabel.setBounds(x, y + 40, 100, 30);
 
-        phoneNumberTf = new JTextField();
+        phoneNumberTf = new StyledTextField();
         phoneNumberTf.setBounds(x + 110, y + 40, 200, 30);
 
-        roleLabel = new JLabel("Role: ");
+        roleLabel = new StyledLabel("Role: ");
         roleLabel.setBounds(x, y + 40 * 2, 100, 30);
 
-        roleTf = new JTextField();
+        roleTf = new StyledTextField();
         roleTf.setBounds(x + 110, y + 40 * 2, 200, 30);
 
-        salaryLabel = new JLabel("Salary: ");
+        salaryLabel = new StyledLabel("Salary: ");
         salaryLabel.setBounds(x, y + 40 * 3, 100, 30);
 
-        salaryTf = new JTextField();
+        salaryTf = new StyledTextField();
         salaryTf.setBounds(x + 110, y + 40 * 3, 200, 30);
 
-        saveBtn = new JButton("Save");
+        saveBtn = new StyledButton("Save");
         saveBtn.setBackground(Color.GREEN);
         saveBtn.setBounds(x + 110, y + 40 * 4, 200, 30);
 
-        deleteBtn = new JButton("Delete");
+        deleteBtn = new StyledButton("Delete");
         deleteBtn.setBackground(Color.RED);
         deleteBtn.setBounds(x + 110, y + 40 * 5, 200, 30);
         if (username == null || username.isEmpty()) {
