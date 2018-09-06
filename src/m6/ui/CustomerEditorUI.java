@@ -4,6 +4,7 @@ import m6.ConnectionManager;
 import m6.UserLoginInfo;
 import m6.components.StyledButton;
 import m6.components.StyledLabel;
+import m6.components.StyledPasswordField;
 import m6.components.StyledTextField;
 
 import javax.swing.*;
@@ -20,8 +21,9 @@ public class CustomerEditorUI extends UserBaseUI {
     private String username;
 
     private StyledButton saveBtn, deleteBtn;
-    private StyledLabel usernameLabel, phoneNumberLabel, accountNumberLabel;
-    private StyledTextField usernameTf, phoneNumberTf, accountNumberTf;
+    private StyledLabel usernameLabel, phoneNumberLabel, accountNumberLabel, passwordLabel, nameLabel;
+    private StyledTextField usernameTf, phoneNumberTf, accountNumberTf, nameTf;
+    private StyledPasswordField passwordTf;
 
     public CustomerEditorUI(UserLoginInfo userLoginInfo, String username) {
         super(userLoginInfo);
@@ -47,7 +49,7 @@ public class CustomerEditorUI extends UserBaseUI {
 
     private void initUI() {
         int x = 200;
-        int y = 140;
+        int y = 120;
 
         usernameLabel = new StyledLabel("Username: ");
         usernameLabel.setBounds(x, y, 100, 30);
@@ -70,12 +72,24 @@ public class CustomerEditorUI extends UserBaseUI {
         accountNumberTf = new StyledTextField();
         accountNumberTf.setBounds(x + 110, y + 40 * 2, 200, 30);
 
+        passwordLabel = new StyledLabel("Password: ");
+        passwordLabel.setBounds(x, y + 40 * 3, 100, 30);
+
+        passwordTf = new StyledPasswordField();
+        passwordTf.setBounds(x + 110, y + 40 * 3, 200, 30);
+
+        nameLabel = new StyledLabel("Name: ");
+        nameLabel.setBounds(x, y + 40 * 4, 100, 30);
+
+        nameTf = new StyledTextField();
+        nameTf.setBounds(x + 110, y + 40 * 4, 200, 30);
+
         saveBtn = new StyledButton("Save");
-        saveBtn.setBounds(x + 110, y + 40 * 3, 200, 35);
+        saveBtn.setBounds(x + 110, y + 40 * 5, 200, 35);
 
         deleteBtn = new StyledButton("Delete");
         deleteBtn.setBackground(new Color(0xF35E5F));
-        deleteBtn.setBounds(x + 110, y + 40 * 4, 200, 35);
+        deleteBtn.setBounds(x + 110, y + 40 * 6, 200, 35);
         if (username == null || username.isEmpty()) {
             deleteBtn.setVisible(false);
         }
@@ -88,6 +102,12 @@ public class CustomerEditorUI extends UserBaseUI {
 
         mainPanel.add(accountNumberLabel);
         mainPanel.add(accountNumberTf);
+
+        mainPanel.add(nameLabel);
+        mainPanel.add(nameTf);
+
+        mainPanel.add(passwordLabel);
+        mainPanel.add(passwordTf);
 
         mainPanel.add(saveBtn);
         mainPanel.add(deleteBtn);
@@ -102,17 +122,23 @@ public class CustomerEditorUI extends UserBaseUI {
         Connection conn = ConnectionManager.getInstance().getConnection();
         try {
             PreparedStatement ps = conn.prepareStatement(
-                    "SELECT username, phoneNumber, accountNumber FROM customer WHERE username=?"
+                    "SELECT login.username, login.name, login.password, customer.phoneNumber, customer.accountNumber " +
+                            "FROM customer, login " +
+                            "WHERE customer.username=? AND login.username=customer.username"
             );
 
             ps.setString(1, username);
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                String username = rs.getString("username");
-                String phoneNumber = rs.getString("phoneNumber");
-                String accountNumber = rs.getString("accountNumber");
+                String username = rs.getString("login.username");
+                String password = rs.getString("login.password");
+                String name = rs.getString("login.name");
+                String phoneNumber = rs.getString("customer.phoneNumber");
+                String accountNumber = rs.getString("customer.accountNumber");
 
+                nameTf.setText(name);
+                passwordTf.setText(password);
                 usernameTf.setText(username);
                 phoneNumberTf.setText(phoneNumber);
                 accountNumberTf.setText(accountNumber);
@@ -166,37 +192,65 @@ public class CustomerEditorUI extends UserBaseUI {
 
     private void save() {
         // depending on whether the user is in edit mode, appropriate query will be used
-        String insertQuery = "INSERT INTO customer VALUES(?, ?, ?)";
+        String insertUserQuery = "INSERT INTO login(username, password, status, name) VALUES(?, ?, ?, ?)";
+        String insertQuery = "INSERT INTO customer(username, phoneNumber, accountNumber) VALUES(?, ?, ?)";
+
+        String updateUserQuery = "UPDATE login SET password=?, name=? WHERE username=?";
         String updateCustomerQuery = "UPDATE customer SET phoneNumber=?, accountNumber=? WHERE username=?";
 
         Connection conn = ConnectionManager.getInstance().getConnection();
         PreparedStatement ps;
         try {
             if (username == null || username.trim().isEmpty()) {
-                if (!verifyUsername(usernameTf.getText())) {
+                if (verifyUsername(usernameTf.getText())) {
                     JOptionPane.showMessageDialog(this,
-                            "No user present with the given username.");
+                            "A user with the given name already exists");
                     return;
                 }
 
+                // insert the user
+                ps = conn.prepareStatement(insertUserQuery);
+                ps.setString(1, usernameTf.getText().trim());
+                ps.setString(2, new String(passwordTf.getPassword()));
+                ps.setString(3, "customer");
+                ps.setString(4, nameTf.getText().trim());
+
+                System.out.println(ps);
+                ps.executeUpdate();
+
+                // insert the customer
                 ps = conn.prepareStatement(insertQuery);
 
                 ps.setString(1, usernameTf.getText());
                 ps.setString(2, phoneNumberTf.getText().trim());
                 ps.setString(3, accountNumberTf.getText().trim());
+
+                System.out.println(ps);
+                ps.execute();
             } else {
+                // update user
+                ps = conn.prepareStatement(updateUserQuery);
+                ps.setString(1, new String(passwordTf.getPassword()));
+                ps.setString(2, nameTf.getText().trim());
+                ps.setString(3, username);
+
+                System.out.println(ps);
+                ps.executeUpdate();
+
+                // update customer
                 ps = conn.prepareStatement(updateCustomerQuery);
 
                 ps.setString(1, phoneNumberTf.getText().trim());
                 ps.setString(2, accountNumberTf.getText().trim());
                 ps.setString(3, usernameTf.getText());
+
+                System.out.println(ps);
+                ps.executeUpdate();
             }
 
-            System.out.println(ps);
-            ps.execute();
             JOptionPane.showMessageDialog(this, "Success!");
 
-            new EmployeeUI(userLoginInfo).setVisible(true);
+            new CustomerViewerUI(userLoginInfo).setVisible(true);
             setVisible(false);
             dispose();
         } catch (Exception e) {
