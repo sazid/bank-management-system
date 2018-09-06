@@ -168,9 +168,9 @@ public class TransactionViewerUI extends UserBaseUI {
             System.out.println(ps);
 
             ps = conn.prepareStatement(
-                    "UPDATE account SET balance=? WHERE accountNumber=?"
+                    "UPDATE account SET balance=balance+? WHERE accountNumber=?"
             );
-            ps.setDouble(1, getAccountBalance() + depositAmount);
+            ps.setDouble(1, depositAmount);
             ps.setString(2, to);
 
             ps.executeUpdate();
