@@ -21,7 +21,7 @@ public class EmployeeUI extends UserBaseUI {
 
     private StyledButton viewAccountBtn,
             viewCustomerBtn,
-            viewEmployeeBtn, editEmployeeBtn, addEmployeeBtn,
+            viewEmployeeBtn,
             viewLoginBtn, editLoginBtn, addLoginBtn,
             myInfoBtn;
 
@@ -51,16 +51,8 @@ public class EmployeeUI extends UserBaseUI {
 
         // Employees
         viewEmployeeBtn = new StyledButton("View Employees");
-        viewEmployeeBtn.setBounds(x, 250, buttonWidth, buttonHeight);
+        viewEmployeeBtn.setBounds(x + 2 * 150, 250, buttonWidth, buttonHeight);
         viewEmployeeBtn.setVisible(false);
-
-        addEmployeeBtn = new StyledButton("Add Employee");
-        addEmployeeBtn.setBounds(x + 150, 250, buttonWidth, buttonHeight);
-        addEmployeeBtn.setVisible(false);
-
-        editEmployeeBtn = new StyledButton("Edit Employee");
-        editEmployeeBtn.setBounds(x + 2 * 150, 250, buttonWidth, buttonHeight);
-        editEmployeeBtn.setVisible(false);
 
         // Users
         viewLoginBtn = new StyledButton("View Users");
@@ -80,8 +72,6 @@ public class EmployeeUI extends UserBaseUI {
         mainPanel.add(viewCustomerBtn);
 
         mainPanel.add(viewEmployeeBtn);
-        mainPanel.add(addEmployeeBtn);
-        mainPanel.add(editEmployeeBtn);
 
         mainPanel.add(viewLoginBtn);
         mainPanel.add(addLoginBtn);
@@ -100,8 +90,6 @@ public class EmployeeUI extends UserBaseUI {
         editLoginBtn.addActionListener(this);
 
         viewEmployeeBtn.addActionListener(this);
-        addEmployeeBtn.addActionListener(this);
-        editEmployeeBtn.addActionListener(this);
 
         myInfoBtn.addActionListener(this);
     }
@@ -126,21 +114,6 @@ public class EmployeeUI extends UserBaseUI {
             new LoginViewerUI(userLoginInfo).setVisible(true);
             setVisible(false);
             dispose();
-        } else if (src == addEmployeeBtn) {
-            new EmployeeEditorUI(userLoginInfo, null).setVisible(true);
-            setVisible(false);
-            dispose();
-        } else if (src == editEmployeeBtn) {
-            String username = JOptionPane.showInputDialog(this,"Employee username: ");
-
-            if (verifyEmployeeUsername(username)) {
-                new EmployeeEditorUI(userLoginInfo, username).setVisible(true);
-                setVisible(false);
-                dispose();
-            } else {
-                JOptionPane.showMessageDialog(this,
-                        "Username not found or username not specified.");
-            }
         } else if (src == addLoginBtn) {
             new LoginEditorUI(userLoginInfo, null).setVisible(true);
             setVisible(false);
@@ -161,69 +134,6 @@ public class EmployeeUI extends UserBaseUI {
             setVisible(false);
             dispose();
         }
-    }
-
-    private boolean verifyAccountNumber(String accountNumber) {
-        Connection conn = ConnectionManager.getInstance().getConnection();
-        try {
-            PreparedStatement ps = conn.prepareStatement(
-                    "SELECT accountNumber FROM account WHERE accountNumber=?"
-            );
-            ps.setString(1, accountNumber);
-
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                rs.close();
-                ps.close();
-                return true;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return false;
-    }
-
-    private boolean verifyEmployeeUsername(String username) {
-        Connection conn = ConnectionManager.getInstance().getConnection();
-        try {
-            PreparedStatement ps = conn.prepareStatement(
-                    "SELECT username FROM employee WHERE username=?"
-            );
-            ps.setString(1, username);
-
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                rs.close();
-                ps.close();
-                return true;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return false;
-    }
-
-    private boolean verifyCustomerUsername(String username) {
-        Connection conn = ConnectionManager.getInstance().getConnection();
-        try {
-            PreparedStatement ps = conn.prepareStatement(
-                    "SELECT username FROM customer WHERE username=?"
-            );
-            ps.setString(1, username);
-
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                rs.close();
-                ps.close();
-                return true;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return false;
     }
 
     private boolean verifyUsername(String username) {
@@ -254,8 +164,6 @@ public class EmployeeUI extends UserBaseUI {
     private void enableManagerFunctions() {
         setPageTitle("Manager | Home");
         viewEmployeeBtn.setVisible(true);
-        editEmployeeBtn.setVisible(true);
-        addEmployeeBtn.setVisible(true);
     }
 
     private void readFromDb() {

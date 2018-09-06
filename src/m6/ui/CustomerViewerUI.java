@@ -33,6 +33,7 @@ public class CustomerViewerUI extends UserBaseUI implements ListSelectionListene
     private void initUI() {
         table = new JTable(new CustomerTableModel(this));
         table.setPreferredScrollableViewportSize(new Dimension(500, 70));
+
         table.setCellSelectionEnabled(false);
         table.setRowSelectionAllowed(true);
         table.setColumnSelectionAllowed(false);
