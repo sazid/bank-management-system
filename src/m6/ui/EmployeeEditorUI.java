@@ -4,6 +4,7 @@ import m6.ConnectionManager;
 import m6.UserLoginInfo;
 import m6.components.StyledButton;
 import m6.components.StyledLabel;
+import m6.components.StyledPasswordField;
 import m6.components.StyledTextField;
 
 import javax.swing.*;
@@ -20,8 +21,9 @@ public class EmployeeEditorUI extends UserBaseUI {
     private String username;
 
     private StyledButton saveBtn, deleteBtn;
-    private StyledLabel usernameLabel, phoneNumberLabel, roleLabel, salaryLabel;
-    private StyledTextField usernameTf, phoneNumberTf, salaryTf;
+    private StyledLabel usernameLabel, phoneNumberLabel, roleLabel, salaryLabel, nameLabel, passwordLabel;
+    private StyledTextField usernameTf, phoneNumberTf, salaryTf, nameTf;
+    private StyledPasswordField passwordTf;
     private JComboBox<String> roleCmb;
 
     public EmployeeEditorUI(UserLoginInfo userLoginInfo, String username) {
@@ -48,7 +50,7 @@ public class EmployeeEditorUI extends UserBaseUI {
 
     private void initUI() {
         int x = 200;
-        int y = 140;
+        int y = 110;
 
         usernameLabel = new StyledLabel("Username: ");
         usernameLabel.setBounds(x, y, 100, 30);
@@ -77,12 +79,24 @@ public class EmployeeEditorUI extends UserBaseUI {
         salaryTf = new StyledTextField();
         salaryTf.setBounds(x + 110, y + 40 * 3, 200, 30);
 
+        nameLabel = new StyledLabel("Name: ");
+        nameLabel.setBounds(x, y + 40 * 4, 100, 30);
+
+        nameTf = new StyledTextField();
+        nameTf.setBounds(x + 110, y + 40 * 4, 200, 30);
+
+        passwordLabel = new StyledLabel("Password: ");
+        passwordLabel.setBounds(x, y + 40 * 5, 100, 30);
+
+        passwordTf = new StyledPasswordField();
+        passwordTf.setBounds(x + 110, y + 40 * 5, 200, 30);
+
         saveBtn = new StyledButton("Save");
-        saveBtn.setBounds(x + 110, y + 40 * 4, 200, 35);
+        saveBtn.setBounds(x + 110, y + 40 * 6, 200, 35);
 
         deleteBtn = new StyledButton("Delete");
         deleteBtn.setBackground(new Color(0xF35E5F));
-        deleteBtn.setBounds(x + 110, y + 40 * 5, 200, 35);
+        deleteBtn.setBounds(x + 110, y + 40 * 7, 200, 35);
         if (username == null || username.isEmpty()) {
             deleteBtn.setVisible(false);
         }
@@ -99,6 +113,12 @@ public class EmployeeEditorUI extends UserBaseUI {
         mainPanel.add(salaryLabel);
         mainPanel.add(salaryTf);
 
+        mainPanel.add(nameLabel);
+        mainPanel.add(nameTf);
+
+        mainPanel.add(passwordLabel);
+        mainPanel.add(passwordTf);
+
         mainPanel.add(saveBtn);
         mainPanel.add(deleteBtn);
     }
@@ -112,19 +132,25 @@ public class EmployeeEditorUI extends UserBaseUI {
         Connection conn = ConnectionManager.getInstance().getConnection();
         try {
             PreparedStatement ps = conn.prepareStatement(
-                    "SELECT username, phoneNumber, role, salary FROM employee WHERE username=?"
+                    "SELECT login.username, login.name, login.password, employee.phoneNumber, employee.role, employee.salary " +
+                            "FROM employee, login " +
+                            "WHERE login.username=? AND login.username=employee.username"
             );
 
             ps.setString(1, username);
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                String username = rs.getString("username");
-                String phoneNumber = rs.getString("phoneNumber");
-                String role = rs.getString("role");
-                double salary = rs.getDouble("salary");
+                String username = rs.getString("login.username");
+                String name = rs.getString("login.name");
+                String password = rs.getString("login.password");
+                String phoneNumber = rs.getString("employee.phoneNumber");
+                String role = rs.getString("employee.role");
+                double salary = rs.getDouble("employee.salary");
 
                 usernameTf.setText(username);
+                nameTf.setText(name);
+                passwordTf.setText(password);
                 phoneNumberTf.setText(phoneNumber);
                 roleCmb.setSelectedItem(role);
                 salaryTf.setText(String.valueOf(salary));
@@ -133,7 +159,7 @@ public class EmployeeEditorUI extends UserBaseUI {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Error! Failed to fetch data.");
 
-            new EmployeeUI(userLoginInfo).setVisible(true);
+            new EmployeeViewerUI(userLoginInfo).setVisible(true);
             setVisible(false);
             dispose();
         }
@@ -144,7 +170,7 @@ public class EmployeeEditorUI extends UserBaseUI {
         Object src = e.getSource();
 
         if (src == backButton) {
-            new EmployeeUI(userLoginInfo).setVisible(true);
+            new EmployeeViewerUI(userLoginInfo).setVisible(true);
             setVisible(false);
             dispose();
         } else if (src == saveBtn) {
@@ -178,39 +204,65 @@ public class EmployeeEditorUI extends UserBaseUI {
 
     private void save() {
         // depending on whether the user is in edit mode, appropriate query will be used
-        String insertQuery = "INSERT INTO employee VALUES(?, ?, ?, ?)";
+        String insertUserQuery = "INSERT INTO login(username, password, status, name) VALUES(?, ?, ?, ?)";
+        String insertQuery = "INSERT INTO employee(username, phoneNumber, role, salary) VALUES(?, ?, ?, ?)";
+
+        String updateUserQuery = "UPDATE login SET password=?, name=? WHERE username=?";
         String updateEmployeeQuery = "UPDATE employee SET phoneNumber=?, role=?, salary=? WHERE username=?";
 
         Connection conn = ConnectionManager.getInstance().getConnection();
         PreparedStatement ps;
         try {
             if (username == null || username.trim().isEmpty()) {
-                if (!verifyUsername(usernameTf.getText())) {
+                if (verifyUsername(usernameTf.getText())) {
                     JOptionPane.showMessageDialog(this,
-                            "No user present with the given username.");
+                            "Username already exists.");
                     return;
                 }
 
-                ps = conn.prepareStatement(insertQuery);
+                // user insert
+                ps = conn.prepareStatement(insertUserQuery);
+                ps.setString(1, usernameTf.getText().trim());
+                ps.setString(2, new String(passwordTf.getPassword()));
+                ps.setString(3, "customer");
+                ps.setString(4, nameTf.getText().trim());
 
+                System.out.println(ps);
+                ps.executeUpdate();
+
+                // employee insert
+                ps = conn.prepareStatement(insertQuery);
                 ps.setString(1, usernameTf.getText());
                 ps.setString(2, phoneNumberTf.getText().trim());
-                ps.setString(3, roleCmb.getSelectedItem().toString().trim());
+                ps.setString(3, (String) roleCmb.getSelectedItem());
                 ps.setDouble(4, Double.parseDouble(salaryTf.getText()));
-            } else {
-                ps = conn.prepareStatement(updateEmployeeQuery);
 
+                System.out.println(ps);
+                ps.executeUpdate();
+            } else {
+                // update user
+                ps = conn.prepareStatement(updateUserQuery);
+                ps.setString(1, new String(passwordTf.getPassword()));
+                ps.setString(2, nameTf.getText().trim());
+                ps.setString(3, username);
+
+                System.out.println(ps);
+                ps.executeUpdate();
+
+                // update employee
+                ps = conn.prepareStatement(updateEmployeeQuery);
                 ps.setString(1, phoneNumberTf.getText().trim());
-                ps.setString(2, roleCmb.getSelectedItem().toString().trim());
+                ps.setString(2, (String) roleCmb.getSelectedItem());
                 ps.setDouble(3, Double.parseDouble(salaryTf.getText()));
                 ps.setString(4, username);
+
+                System.out.println(ps);
+                ps.executeUpdate();
             }
 
-            System.out.println(ps);
-            ps.execute();
             JOptionPane.showMessageDialog(this, "Success!");
 
-            new EmployeeUI(userLoginInfo).setVisible(true);
+            new EmployeeViewerUI(userLoginInfo).setVisible(true);
             setVisible(false);
             dispose();
         } catch (Exception e) {
@@ -234,7 +286,7 @@ public class EmployeeEditorUI extends UserBaseUI {
 
             if (count > 0) {
                 JOptionPane.showMessageDialog(this, "Success!");
-                new EmployeeUI(userLoginInfo).setVisible(true);
+                new EmployeeViewerUI(userLoginInfo).setVisible(true);
                 setVisible(false);
                 dispose();
             } else {
