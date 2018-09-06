@@ -72,6 +72,7 @@ public class LoginEditorUI extends UserBaseUI {
 
         statusCmb = new JComboBox<>(new String[]{"employee", "customer"});
         statusCmb.setBounds(x + 110, y + 40 * 2, 200, 30);
+        statusCmb.setEnabled(false);
 
         nameLabel = new StyledLabel("Name: ");
         nameLabel.setBounds(x, y + 40 * 3, 100, 30);

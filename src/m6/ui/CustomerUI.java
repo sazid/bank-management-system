@@ -22,7 +22,7 @@ public class CustomerUI extends UserBaseUI {
     private UserLoginInfo userLoginInfo;
 
     private StyledLabel balanceLabel, balanceInfoLabel;
-    private StyledButton viewTransactionButton, cashOutButton, cashInButton, myInfoBtn;
+    private StyledButton viewTransactionButton, myInfoBtn;
 
     public CustomerUI(UserLoginInfo userLoginInfo) {
         super(userLoginInfo);
@@ -39,29 +39,21 @@ public class CustomerUI extends UserBaseUI {
         final int x = 190;
 
         balanceLabel = new StyledLabel("Balance: ");
-        balanceLabel.setFont(new Font("Courier", Font.BOLD, 16));
+        balanceLabel.setFont(new Font("Calibri", Font.BOLD, 24));
         balanceLabel.setBounds(x, 200, 120, 30);
 
         balanceInfoLabel = new StyledLabel();
-        balanceInfoLabel.setFont(new Font("Courier", Font.BOLD, 16));
+        balanceInfoLabel.setFont(new Font("Calibri", Font.BOLD, 24));
         balanceInfoLabel.setBounds(x + 140, 200, 120, 30);
 
         // Accounts
         viewTransactionButton = new StyledButton("View Transactions");
-        viewTransactionButton.setBounds(x, 250, 120, 30);
-
-        cashInButton = new StyledButton("Cash In");
-        cashInButton.setBounds(x + 140, 250, 120, 30);
-
-        cashOutButton = new StyledButton("Cash Out");
-        cashOutButton.setBounds(x + 2 * 140, 250, 120, 30);
+        viewTransactionButton.setBounds(x, 250, 400, 40);
 
         myInfoBtn = new StyledButton("My Information");
-        myInfoBtn.setBounds(x, 300, 400, 30);
+        myInfoBtn.setBounds(x, 300, 400, 40);
 
         mainPanel.add(viewTransactionButton);
-        mainPanel.add(cashInButton);
-        mainPanel.add(cashOutButton);
 
         mainPanel.add(balanceLabel);
         mainPanel.add(balanceInfoLabel);
@@ -71,8 +63,6 @@ public class CustomerUI extends UserBaseUI {
 
     private void bind() {
         viewTransactionButton.addActionListener(this);
-        cashInButton.addActionListener(this);
-        cashOutButton.addActionListener(this);
 
         myInfoBtn.addActionListener(this);
     }
@@ -85,21 +75,6 @@ public class CustomerUI extends UserBaseUI {
             new TransactionViewerUI(userLoginInfo, userLoginInfo.username).setVisible(true);
             setVisible(false);
             dispose();
-        } else if (src == cashOutButton) {
-//            String accountNumber = JOptionPane.showInputDialog(this,"Account Number: ");
-
-//            if (verifyAccountNumber(accountNumber)) {
-//                new AccountEditorUI(userLoginInfo, accountNumber).setVisible(true);
-//                setVisible(false);
-//                dispose();
-//            } else {
-//                JOptionPane.showMessageDialog(this,
-//                        "Account not found or account not specified.");
-//            }
-        } else if (src == cashInButton) {
-//            new AccountEditorUI(userLoginInfo, null).setVisible(true);
-//            setVisible(false);
-//            dispose();
         } else if (src == myInfoBtn) {
             new LoginEditorUI(userLoginInfo, userLoginInfo.username).setVisible(true);
             setVisible(false);
@@ -182,7 +157,7 @@ public class CustomerUI extends UserBaseUI {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 double balance = rs.getDouble("account.balance");
-                balanceInfoLabel.setText("৳" + String.valueOf(balance));
+                balanceInfoLabel.setText(String.valueOf(balance));
             }
         } catch (SQLException e) {
             e.printStackTrace();

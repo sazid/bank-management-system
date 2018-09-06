@@ -42,7 +42,12 @@ public class TransactionViewerUI extends UserBaseUI {
         Object src = e.getSource();
 
         if (src == backButton) {
-            new CustomerViewerUI(userLoginInfo).setVisible(true);
+            if (userLoginInfo.status.equals("employee")) {
+                new CustomerViewerUI(userLoginInfo).setVisible(true);
+            } else {
+                new CustomerUI(userLoginInfo).setVisible(true);
+            }
+
             setVisible(false);
             dispose();
         }

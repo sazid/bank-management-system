@@ -51,7 +51,7 @@ public class UserBaseUI extends JFrame implements ActionListener {
         titleLabel.setBounds(10, 5, 500, 35);
 
         nameLabel = new StyledLabel("Logged in as: " + loginInfo.name);
-        nameLabel.setBounds(10, 35, 200, 20);
+        nameLabel.setBounds(10, 35, 500, 20);
 
         logoutButton = new StyledButton("Logout");
         logoutButton.setBounds(670, 16, 100, 35);
