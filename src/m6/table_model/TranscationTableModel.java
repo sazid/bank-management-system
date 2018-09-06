@@ -35,7 +35,7 @@ public class TranscationTableModel extends AbstractTableModel {
                     "SELECT transaction.accountNumber, transaction.type, transaction.amount, transaction.date " +
                             "FROM transaction, customer " +
                             "WHERE customer.username=? AND customer.accountNumber=transaction.accountNumber " +
-                            "ORDER BY transaction.date DESC"
+                            "ORDER BY transaction.date ASC"
             );
 
             ps.setString(1, username);
