@@ -97,13 +97,38 @@ public class TransactionViewerUI extends UserBaseUI {
                 withdraw();
             } else if (src == transferBtn) {
                 String to = JOptionPane.showInputDialog("Recipient account number");
-                transfer(to);
+				if (verifyAccountNumber(to)) {
+					transfer(to);
+				} else {
+					JOptionPane.showMessageDialog(this, "Account number not found");
+				}
             }
         } catch (Exception er) {
             er.printStackTrace();
             JOptionPane.showMessageDialog(this, "Failed to perform the action");
         }
     }
+	
+	private boolean verifyAccountNumber(String accountNumber) {
+		try {
+			Connection conn = ConnectionManager.getInstance().getConnection();
+			
+			PreparedStatement ps = conn.prepareStatement(
+				"SELECT accountNumber FROM account WHERE accountNumber=?"
+			);
+			ps.setString(1, accountNumber);
+			ResultSet rs = ps.executeQuery();
+			
+			if (rs.next()) {
+				return true;
+			}
+		} catch (Exception er) {
+			er.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Failed to verify account.");
+		}
+		
+		return false;
+	}
 
     private void transfer(String to) {
         try {

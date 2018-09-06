@@ -20,6 +20,7 @@ public class CustomerTableModel extends AbstractTableModel {
         columnNames.add("Username");
         columnNames.add("Account Number");
         columnNames.add("Phone Number");
+        columnNames.add("Balanace");
 
         data = readFromDb();
 
@@ -32,9 +33,9 @@ public class CustomerTableModel extends AbstractTableModel {
 
         try {
             PreparedStatement ps = conn.prepareStatement(
-                    "SELECT login.name, customer.username, customer.accountNumber, customer.phoneNumber, customer.accountNumber " +
-                            "FROM customer, login " +
-                            "WHERE login.username=customer.username " +
+                    "SELECT login.name, customer.username, customer.accountNumber, customer.phoneNumber, customer.accountNumber, account.balance " +
+                            "FROM customer, login, account " +
+                            "WHERE login.username=customer.username AND account.accountNumber=customer.accountNumber " +
                             "ORDER BY login.name ASC"
             );
 
@@ -44,8 +45,9 @@ public class CustomerTableModel extends AbstractTableModel {
                 String username = rs.getString("customer.username");
                 String accountNumber = rs.getString("customer.accountNumber");
                 String phoneNumber = rs.getString("customer.phoneNumber");
+                String balance = rs.getString("account.balance");
 
-                v.add(new Object[]{name, username, accountNumber, phoneNumber});
+                v.add(new Object[]{name, username, accountNumber, phoneNumber, balance});
             }
         } catch (SQLException e) {
             e.printStackTrace();
