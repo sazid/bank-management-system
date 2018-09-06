@@ -22,7 +22,6 @@ public class EmployeeUI extends UserBaseUI {
     private StyledButton viewAccountBtn,
             viewCustomerBtn,
             viewEmployeeBtn,
-            viewLoginBtn, editLoginBtn, addLoginBtn,
             myInfoBtn;
 
     public EmployeeUI(UserLoginInfo userLoginInfo) {
@@ -37,45 +36,31 @@ public class EmployeeUI extends UserBaseUI {
     }
 
     private void initUI() {
-        final int x = 170;
+        final int x = 240;
         final int buttonHeight = 35;
-        final int buttonWidth = 130;
+        final int buttonWidth = 300;
 
         // Accounts
         viewAccountBtn = new StyledButton("View Accounts");
-        viewAccountBtn.setBounds(x + 2 * 150, 150, buttonWidth, buttonHeight);
+        viewAccountBtn.setBounds(x, 150, buttonWidth, buttonHeight);
 
         // Customers
         viewCustomerBtn = new StyledButton("View Customers");
-        viewCustomerBtn.setBounds(x + 2 * 150, 200, buttonWidth, buttonHeight);
+        viewCustomerBtn.setBounds(x, 200, buttonWidth, buttonHeight);
 
         // Employees
         viewEmployeeBtn = new StyledButton("View Employees");
-        viewEmployeeBtn.setBounds(x + 2 * 150, 250, buttonWidth, buttonHeight);
+        viewEmployeeBtn.setBounds(x, 250, buttonWidth, buttonHeight);
         viewEmployeeBtn.setVisible(false);
 
-        // Users
-        viewLoginBtn = new StyledButton("View Users");
-        viewLoginBtn.setBounds(x, 300, buttonWidth, buttonHeight);
-
-        addLoginBtn = new StyledButton("Add User");
-        addLoginBtn.setBounds(x + 150, 300, buttonWidth, buttonHeight);
-
-        editLoginBtn = new StyledButton("Edit User");
-        editLoginBtn.setBounds(x + 2 * 150, 300, buttonWidth, buttonHeight);
-
         myInfoBtn = new StyledButton("My Information");
-        myInfoBtn.setBounds(x, 350, 430, buttonHeight);
+        myInfoBtn.setBounds(x, 350, buttonWidth, buttonHeight);
 
         mainPanel.add(viewAccountBtn);
 
         mainPanel.add(viewCustomerBtn);
 
         mainPanel.add(viewEmployeeBtn);
-
-        mainPanel.add(viewLoginBtn);
-        mainPanel.add(addLoginBtn);
-        mainPanel.add(editLoginBtn);
 
         mainPanel.add(myInfoBtn);
     }
@@ -84,10 +69,6 @@ public class EmployeeUI extends UserBaseUI {
         viewAccountBtn.addActionListener(this);
 
         viewCustomerBtn.addActionListener(this);
-
-        viewLoginBtn.addActionListener(this);
-        addLoginBtn.addActionListener(this);
-        editLoginBtn.addActionListener(this);
 
         viewEmployeeBtn.addActionListener(this);
 
@@ -110,52 +91,11 @@ public class EmployeeUI extends UserBaseUI {
             new EmployeeViewerUI(userLoginInfo).setVisible(true);
             setVisible(false);
             dispose();
-        } else if (src == viewLoginBtn) {
-            new LoginViewerUI(userLoginInfo).setVisible(true);
-            setVisible(false);
-            dispose();
-        } else if (src == addLoginBtn) {
-            new LoginEditorUI(userLoginInfo, null).setVisible(true);
-            setVisible(false);
-            dispose();
-        } else if (src == editLoginBtn) {
-            String username = JOptionPane.showInputDialog(this,"Username: ");
-
-            if (verifyUsername(username)) {
-                new LoginEditorUI(userLoginInfo, username).setVisible(true);
-                setVisible(false);
-                dispose();
-            } else {
-                JOptionPane.showMessageDialog(this,
-                        "Username not found or username not specified.");
-            }
         } else if (src == myInfoBtn) {
             new LoginEditorUI(userLoginInfo, userLoginInfo.username).setVisible(true);
             setVisible(false);
             dispose();
         }
-    }
-
-    private boolean verifyUsername(String username) {
-        Connection conn = ConnectionManager.getInstance().getConnection();
-        try {
-            PreparedStatement ps = conn.prepareStatement(
-                    "SELECT username FROM login WHERE username=?"
-            );
-            ps.setString(1, username);
-            System.out.println(ps);
-
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                rs.close();
-                ps.close();
-                return true;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return false;
     }
 
     /**
