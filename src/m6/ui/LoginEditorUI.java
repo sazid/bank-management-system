@@ -22,8 +22,9 @@ public class LoginEditorUI extends UserBaseUI {
 
     private StyledButton saveBtn, deleteBtn;
     private StyledLabel usernameLabel, passwordLabel, statusLabel, nameLabel;
-    private StyledTextField usernameTf, statusTf, nameTf;
+    private StyledTextField usernameTf, nameTf;
     private StyledPasswordField passwordTf;
+    private JComboBox<String> statusCmb;
 
     public LoginEditorUI(UserLoginInfo userLoginInfo, String username) {
         super(userLoginInfo);
@@ -69,8 +70,8 @@ public class LoginEditorUI extends UserBaseUI {
         statusLabel = new StyledLabel("Status: ");
         statusLabel.setBounds(x, y + 40 * 2, 100, 30);
 
-        statusTf = new StyledTextField();
-        statusTf.setBounds(x + 110, y + 40 * 2, 200, 30);
+        statusCmb = new JComboBox<>(new String[]{"employee", "customer"});
+        statusCmb.setBounds(x + 110, y + 40 * 2, 200, 30);
 
         nameLabel = new StyledLabel("Name: ");
         nameLabel.setBounds(x, y + 40 * 3, 100, 30);
@@ -95,7 +96,7 @@ public class LoginEditorUI extends UserBaseUI {
         mainPanel.add(passwordTf);
 
         mainPanel.add(statusLabel);
-        mainPanel.add(statusTf);
+        mainPanel.add(statusCmb);
 
         mainPanel.add(nameLabel);
         mainPanel.add(nameTf);
@@ -127,7 +128,7 @@ public class LoginEditorUI extends UserBaseUI {
 
                 usernameTf.setText(username);
                 passwordTf.setText(password);
-                statusTf.setText(status);
+                statusCmb.setSelectedItem(status);
                 nameTf.setText(name);
             }
         } catch (SQLException e) {
@@ -175,7 +176,7 @@ public class LoginEditorUI extends UserBaseUI {
 
                 ps.setString(1, usernameTf.getText());
                 ps.setString(2, new String(passwordTf.getPassword()));
-                ps.setString(3, statusTf.getText());
+                ps.setString(3, statusCmb.getSelectedItem().toString());
                 ps.setString(4, nameTf.getText());
             } else {
                 ps = conn.prepareStatement(updateQuery);
@@ -184,7 +185,7 @@ public class LoginEditorUI extends UserBaseUI {
 
                 ps.setString(1, usernameTf.getText());
                 ps.setString(2, new String(passwordTf.getPassword()));
-                ps.setString(3, statusTf.getText());
+                ps.setString(3, statusCmb.getSelectedItem().toString());
                 ps.setString(4, nameTf.getText());
                 ps.setString(5, username);
 

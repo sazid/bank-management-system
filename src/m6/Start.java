@@ -2,6 +2,7 @@ package m6;
 
 import m6.ui.LoginUI;
 
+import javax.swing.*;
 import java.awt.*;
 
 public class Start {
@@ -11,10 +12,10 @@ public class Start {
         ConnectionManager.getInstance();
 
         // use native look and feel if available
-//        try {
-//            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-//        } catch (Exception ignored) {
-//        }
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception ignored) {
+        }
 
         EventQueue.invokeLater(new Runnable() {
             @Override
