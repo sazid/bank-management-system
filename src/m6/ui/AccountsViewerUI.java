@@ -29,8 +29,6 @@ public class AccountsViewerUI extends UserBaseUI implements ListSelectionListene
 
         initUI();
         bind();
-
-        setLocationRelativeTo(null);
     }
 
     private void initUI() {
@@ -59,7 +57,6 @@ public class AccountsViewerUI extends UserBaseUI implements ListSelectionListene
         table.getSelectionModel().addListSelectionListener(this);
     }
 
-    @Override
     public void valueChanged(ListSelectionEvent e) {
         ListSelectionModel lsm = (ListSelectionModel) e.getSource();
 

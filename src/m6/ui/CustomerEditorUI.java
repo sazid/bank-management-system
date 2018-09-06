@@ -147,7 +147,7 @@ public class CustomerEditorUI extends UserBaseUI {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Error! Failed to fetch data.");
 
-            new EmployeeUI(userLoginInfo).setVisible(true);
+            new CustomerViewerUI(userLoginInfo).setVisible(true);
             setVisible(false);
             dispose();
         }
@@ -158,7 +158,7 @@ public class CustomerEditorUI extends UserBaseUI {
         Object src = e.getSource();
 
         if (src == backButton) {
-            new EmployeeUI(userLoginInfo).setVisible(true);
+            new CustomerViewerUI(userLoginInfo).setVisible(true);
             setVisible(false);
             dispose();
         } else if (src == saveBtn) {
@@ -274,7 +274,7 @@ public class CustomerEditorUI extends UserBaseUI {
 
             if (count > 0) {
                 JOptionPane.showMessageDialog(this, "Success!");
-                new EmployeeUI(userLoginInfo).setVisible(true);
+                new CustomerViewerUI(userLoginInfo).setVisible(true);
                 setVisible(false);
                 dispose();
             } else {

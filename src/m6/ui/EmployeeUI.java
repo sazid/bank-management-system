@@ -20,7 +20,7 @@ public class EmployeeUI extends UserBaseUI {
     private UserLoginInfo userLoginInfo;
 
     private StyledButton viewAccountBtn,
-            viewCustomerBtn, editCustomerBtn, addCustomerBtn,
+            viewCustomerBtn,
             viewEmployeeBtn, editEmployeeBtn, addEmployeeBtn,
             viewLoginBtn, editLoginBtn, addLoginBtn,
             myInfoBtn;
@@ -47,13 +47,7 @@ public class EmployeeUI extends UserBaseUI {
 
         // Customers
         viewCustomerBtn = new StyledButton("View Customers");
-        viewCustomerBtn.setBounds(x, 200, buttonWidth, buttonHeight);
-
-        addCustomerBtn = new StyledButton("Add Customers");
-        addCustomerBtn.setBounds(x + 150, 200, buttonWidth, buttonHeight);
-
-        editCustomerBtn = new StyledButton("Edit Customer");
-        editCustomerBtn.setBounds(x + 2 * 150, 200, buttonWidth, buttonHeight);
+        viewCustomerBtn.setBounds(x + 2 * 150, 200, buttonWidth, buttonHeight);
 
         // Employees
         viewEmployeeBtn = new StyledButton("View Employees");
@@ -84,8 +78,6 @@ public class EmployeeUI extends UserBaseUI {
         mainPanel.add(viewAccountBtn);
 
         mainPanel.add(viewCustomerBtn);
-        mainPanel.add(addCustomerBtn);
-        mainPanel.add(editCustomerBtn);
 
         mainPanel.add(viewEmployeeBtn);
         mainPanel.add(addEmployeeBtn);
@@ -102,8 +94,6 @@ public class EmployeeUI extends UserBaseUI {
         viewAccountBtn.addActionListener(this);
 
         viewCustomerBtn.addActionListener(this);
-        addCustomerBtn.addActionListener(this);
-        editCustomerBtn.addActionListener(this);
 
         viewLoginBtn.addActionListener(this);
         addLoginBtn.addActionListener(this);
@@ -145,21 +135,6 @@ public class EmployeeUI extends UserBaseUI {
 
             if (verifyEmployeeUsername(username)) {
                 new EmployeeEditorUI(userLoginInfo, username).setVisible(true);
-                setVisible(false);
-                dispose();
-            } else {
-                JOptionPane.showMessageDialog(this,
-                        "Username not found or username not specified.");
-            }
-        } else if (src == addCustomerBtn) {
-            new CustomerEditorUI(userLoginInfo, null).setVisible(true);
-            setVisible(false);
-            dispose();
-        } else if (src == editCustomerBtn) {
-            String username = JOptionPane.showInputDialog(this,"Customer username: ");
-
-            if (verifyCustomerUsername(username)) {
-                new CustomerEditorUI(userLoginInfo, username).setVisible(true);
                 setVisible(false);
                 dispose();
             } else {
