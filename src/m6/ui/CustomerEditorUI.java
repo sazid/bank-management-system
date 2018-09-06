@@ -20,7 +20,7 @@ public class CustomerEditorUI extends UserBaseUI {
     private UserLoginInfo userLoginInfo;
     private String username;
 
-    private StyledButton saveBtn, deleteBtn;
+    private StyledButton saveBtn, deleteBtn, transactionBtn;
     private StyledLabel usernameLabel, phoneNumberLabel, accountNumberLabel, passwordLabel, nameLabel;
     private StyledTextField usernameTf, phoneNumberTf, accountNumberTf, nameTf;
     private StyledPasswordField passwordTf;
@@ -49,7 +49,7 @@ public class CustomerEditorUI extends UserBaseUI {
 
     private void initUI() {
         int x = 200;
-        int y = 120;
+        int y = 110;
 
         usernameLabel = new StyledLabel("Username: ");
         usernameLabel.setBounds(x, y, 100, 30);
@@ -90,8 +90,13 @@ public class CustomerEditorUI extends UserBaseUI {
         deleteBtn = new StyledButton("Delete");
         deleteBtn.setBackground(new Color(0xF35E5F));
         deleteBtn.setBounds(x + 110, y + 40 * 6, 200, 35);
+
+        transactionBtn = new StyledButton("Transactions");
+        transactionBtn.setBounds(x + 110, y + 40 * 7, 200, 35);
+
         if (username == null || username.isEmpty()) {
             deleteBtn.setVisible(false);
+            transactionBtn.setVisible(false);
         }
 
         mainPanel.add(usernameLabel);
@@ -111,11 +116,13 @@ public class CustomerEditorUI extends UserBaseUI {
 
         mainPanel.add(saveBtn);
         mainPanel.add(deleteBtn);
+        mainPanel.add(transactionBtn);
     }
 
     private void bind() {
         saveBtn.addActionListener(this);
         deleteBtn.addActionListener(this);
+        transactionBtn.addActionListener(this);
     }
 
     private void readFromDb() {
@@ -165,6 +172,10 @@ public class CustomerEditorUI extends UserBaseUI {
             save();
         } else if (src == deleteBtn) {
             delete();
+        } else if (src == transactionBtn) {
+            new TransactionViewerUI(userLoginInfo, username).setVisible(true);
+            setVisible(false);
+            dispose();
         }
     }
 

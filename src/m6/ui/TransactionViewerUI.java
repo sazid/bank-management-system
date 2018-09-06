@@ -1,7 +1,6 @@
 package m6.ui;
 
 import m6.UserLoginInfo;
-import m6.table_model.AccountTableModel;
 import m6.table_model.TranscationTableModel;
 
 import javax.swing.*;
@@ -11,15 +10,17 @@ import java.awt.event.ActionEvent;
 public class TransactionViewerUI extends UserBaseUI {
 
     private UserLoginInfo userLoginInfo;
+    private String username;
 
     private JTable table;
     private JScrollPane scrollPane;
 
-    public TransactionViewerUI(UserLoginInfo userLoginInfo) {
+    public TransactionViewerUI(UserLoginInfo userLoginInfo, String username) {
         super(userLoginInfo);
         this.userLoginInfo = userLoginInfo;
+        this.username = username;
 
-        setPageTitle("View Transactions");
+        setPageTitle("View Transactions | " + username);
         backButton.setVisible(true);
         backButton.addActionListener(this);
 
@@ -27,7 +28,7 @@ public class TransactionViewerUI extends UserBaseUI {
     }
 
     private void initUI() {
-        table = new JTable(new TranscationTableModel(this));
+        table = new JTable(new TranscationTableModel(this, username));
         table.setPreferredScrollableViewportSize(new Dimension(500, 70));
 
         scrollPane = new JScrollPane(table);
@@ -41,7 +42,7 @@ public class TransactionViewerUI extends UserBaseUI {
         Object src = e.getSource();
 
         if (src == backButton) {
-            new CustomerUI(userLoginInfo).setVisible(true);
+            new CustomerViewerUI(userLoginInfo).setVisible(true);
             setVisible(false);
             dispose();
         }

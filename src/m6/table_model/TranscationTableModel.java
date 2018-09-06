@@ -11,8 +11,11 @@ public class TranscationTableModel extends AbstractTableModel {
     private Vector<String> columnNames = new Vector<>();
     private Vector<Object[]> data;
     private JFrame ui;
+    private String username;
 
-    public TranscationTableModel(JFrame ui) {
+    public TranscationTableModel(JFrame ui, String username) {
+        this.username = username;
+
         columnNames.add("Account Number");
         columnNames.add("Type");
         columnNames.add("Amount");
@@ -29,17 +32,20 @@ public class TranscationTableModel extends AbstractTableModel {
 
         try {
             PreparedStatement ps = conn.prepareStatement(
-                    "SELECT accountNumber, type, amount, date " +
-                            "FROM transaction " +
-                            "ORDER BY date DESC"
+                    "SELECT transaction.accountNumber, transaction.type, transaction.amount, transaction.date " +
+                            "FROM transaction, customer " +
+                            "WHERE customer.username=? AND customer.accountNumber=transaction.accountNumber " +
+                            "ORDER BY transaction.date DESC"
             );
+
+            ps.setString(1, username);
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                String type = rs.getString("type");
-                String amount = rs.getString("amount");
-                String accountNumber = rs.getString("accountNumber");
-                Date date = rs.getDate("date");
+                String type = rs.getString("transaction.type");
+                String amount = rs.getString("transaction.amount");
+                String accountNumber = rs.getString("transaction.accountNumber");
+                Date date = rs.getDate("transaction.date");
 
                 v.add(new Object[]{accountNumber, type, amount, date});
             }

@@ -82,7 +82,7 @@ public class CustomerUI extends UserBaseUI {
         Object src = e.getSource();
 
         if (src == viewTransactionButton) {
-            new TransactionViewerUI(userLoginInfo).setVisible(true);
+            new TransactionViewerUI(userLoginInfo, userLoginInfo.username).setVisible(true);
             setVisible(false);
             dispose();
         } else if (src == cashOutButton) {
