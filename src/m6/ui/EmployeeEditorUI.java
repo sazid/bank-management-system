@@ -21,7 +21,8 @@ public class EmployeeEditorUI extends UserBaseUI {
 
     private StyledButton saveBtn, deleteBtn;
     private StyledLabel usernameLabel, phoneNumberLabel, roleLabel, salaryLabel;
-    private StyledTextField usernameTf, phoneNumberTf, roleTf, salaryTf;
+    private StyledTextField usernameTf, phoneNumberTf, salaryTf;
+    private JComboBox<String> roleCmb;
 
     public EmployeeEditorUI(UserLoginInfo userLoginInfo, String username) {
         super(userLoginInfo);
@@ -67,8 +68,8 @@ public class EmployeeEditorUI extends UserBaseUI {
         roleLabel = new StyledLabel("Role: ");
         roleLabel.setBounds(x, y + 40 * 2, 100, 30);
 
-        roleTf = new StyledTextField();
-        roleTf.setBounds(x + 110, y + 40 * 2, 200, 30);
+        roleCmb = new JComboBox<>(new String[]{"manager", "general"});
+        roleCmb.setBounds(x + 110, y + 40 * 2, 200, 30);
 
         salaryLabel = new StyledLabel("Salary: ");
         salaryLabel.setBounds(x, y + 40 * 3, 100, 30);
@@ -93,7 +94,7 @@ public class EmployeeEditorUI extends UserBaseUI {
         mainPanel.add(phoneNumberTf);
 
         mainPanel.add(roleLabel);
-        mainPanel.add(roleTf);
+        mainPanel.add(roleCmb);
 
         mainPanel.add(salaryLabel);
         mainPanel.add(salaryTf);
@@ -125,7 +126,7 @@ public class EmployeeEditorUI extends UserBaseUI {
 
                 usernameTf.setText(username);
                 phoneNumberTf.setText(phoneNumber);
-                roleTf.setText(role);
+                roleCmb.setSelectedItem(role);
                 salaryTf.setText(String.valueOf(salary));
             }
         } catch (SQLException e) {
@@ -194,13 +195,13 @@ public class EmployeeEditorUI extends UserBaseUI {
 
                 ps.setString(1, usernameTf.getText());
                 ps.setString(2, phoneNumberTf.getText().trim());
-                ps.setString(3, roleTf.getText().trim());
+                ps.setString(3, roleCmb.getSelectedItem().toString().trim());
                 ps.setDouble(4, Double.parseDouble(salaryTf.getText()));
             } else {
                 ps = conn.prepareStatement(updateEmployeeQuery);
 
                 ps.setString(1, phoneNumberTf.getText().trim());
-                ps.setString(2, roleTf.getText().trim());
+                ps.setString(2, roleCmb.getSelectedItem().toString().trim());
                 ps.setDouble(3, Double.parseDouble(salaryTf.getText()));
                 ps.setString(4, username);
             }
