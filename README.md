@@ -1,5 +1,4 @@
 # Bank Management System
-===
 
 A dummy bank management system application written in Java/Swing/MySQL.
 
@@ -14,13 +13,16 @@ A dummy bank management system application written in Java/Swing/MySQL.
 4. Run Start.bat
 
 > Admin account
-> Username: admin
+>
+> **Username**: admin
 > Password: admin
 > 
 > Employee account
+>
 > Username: hello
 > Password: hello
 > 
 > Customer account
+>
 > Username: sazid
 > Password: password
