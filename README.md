@@ -12,17 +12,17 @@ A dummy bank management system application written in Java/Swing/MySQL.
 3. Rename Start.txt file to Start.bat
 4. Run Start.bat
 
-> Admin account
->
-> **Username**: admin
+Admin account
+
+> Username: admin
 > Password: admin
-> 
-> Employee account
->
+ 
+Employee account
+
 > Username: hello
 > Password: hello
-> 
-> Customer account
->
+
+Customer account
+
 > Username: sazid
 > Password: password
